@@ -4,94 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>골목대장</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-:root{
-  --ch:#F5A623;--chd:#C17F24;--chdd:#8B5A10;
-  --chl:#FFF8E7;--chm:#FAEEDA;--chb:#FAC775;
-  --bg:#F7F3EB;--white:#fff;--border:#E8E4DC;
-  --t1:#1A1A1A;--t2:#555;--t3:#999;
-  --up:#1D9E75;--dn:#E24B4A;--info:#378ADD;
-  --nav-h:56px;--tab-h:60px;
-}
+:root{--ch:#F5A623;--chd:#C17F24;--chdd:#8B5A10;--chl:#FFF8E7;--chm:#FAEEDA;--chb:#FAC775;--bg:#F7F3EB;--white:#fff;--border:#E8E4DC;--t1:#1A1A1A;--t2:#555;--t3:#999;--up:#1D9E75;--dn:#E24B4A;--info:#378ADD;}
 html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--t1);font-size:14px;}
-
-/* ── APP SHELL ── */
-.app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto;background:var(--white);position:relative;overflow:hidden;}
-
-/* ── TOPBAR ── */
-.topbar{height:var(--nav-h);background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;z-index:50;}
-.tb-logo{display:flex;align-items:center;gap:7px;flex:1;}
-.tb-cat{width:32px;height:32px;border-radius:50%;background:var(--chl);border:2px solid var(--ch);display:flex;align-items:center;justify-content:center;font-size:18px;}
-.tb-name{font-size:17px;font-weight:700;color:var(--chd);}
-.tb-icons{display:flex;gap:6px;align-items:center;}
-.tbi{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:18px;position:relative;}
-.tbi.has-dot::after{content:'';position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--ch);border-radius:50%;border:2px solid var(--white);}
-
-/* ── SCREEN ROUTER ── */
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto;background:var(--white);overflow:hidden;}
+.topbar{background:var(--ch);flex-shrink:0;}
+.tb-main{height:56px;display:flex;align-items:center;padding:0 16px;gap:10px;}
+.tb-logo{display:flex;align-items:center;gap:8px;flex:1;}
+.tb-cat{width:34px;height:34px;border-radius:50%;background:var(--white);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.tb-name{font-size:18px;font-weight:700;color:#fff;}
+.tb-sub{font-size:10px;color:rgba(255,255,255,.85);margin-top:1px;}
+.tb-icons{display:flex;gap:4px;}
+.tbi{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:20px;position:relative;}
+.tbi.dot::after{content:'';position:absolute;top:7px;right:7px;width:8px;height:8px;background:#fff;border-radius:50%;border:2px solid var(--ch);}
+.loc-bar{background:rgba(255,255,255,.2);margin:0 14px 10px;border-radius:24px;padding:8px 14px;display:flex;align-items:center;gap:6px;cursor:pointer;}
+.loc-bar i,.loc-bar span,.loc-bar .cv{color:#fff;}
+.loc-bar span{font-size:13px;font-weight:500;flex:1;}
+.loc-bar .cv{font-size:13px;opacity:.8;}
+.srch-wrap{background:var(--white);margin:0 14px 12px;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;}
+.srch-wrap .si{color:var(--ch);font-size:17px;}
+.srch-wrap span{flex:1;font-size:13px;color:var(--t3);}
+.srch-wrap .mic{color:var(--ch);font-size:20px;}
 .screens{flex:1;overflow:hidden;position:relative;}
 .screen{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none;flex-direction:column;background:var(--bg);}
 .screen.active{display:flex;}
-
-/* ── BOTTOM NAV ── */
-.bottom-nav{height:var(--tab-h);background:var(--white);border-top:1px solid var(--border);display:flex;flex-shrink:0;z-index:50;}
-.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--t3);font-size:10px;transition:color .15s;position:relative;}
+.bottom-nav{height:62px;background:var(--white);border-top:1px solid var(--border);display:flex;flex-shrink:0;z-index:50;}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--t3);font-size:10px;}
 .bn-item i{font-size:22px;}
 .bn-item.act{color:var(--chd);}
 .bn-item.act i{color:var(--ch);}
-.bn-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--ch);color:#fff;font-size:9px;font-weight:700;border-radius:10px;padding:1px 5px;min-width:16px;text-align:center;}
-
-/* ── FEED TABS ── */
-.feed-tabs{background:var(--white);border-bottom:1px solid var(--border);display:flex;flex-shrink:0;position:sticky;top:0;z-index:40;}
-.ft{flex:1;padding:12px 0;font-size:14px;cursor:pointer;color:var(--t2);border-bottom:3px solid transparent;display:flex;align-items:center;justify-content:center;gap:5px;transition:color .12s;}
-.ft i{font-size:15px;}
+.bn-plus-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:0;cursor:pointer;font-size:10px;color:var(--t3);}
+.bn-plus{width:48px;height:48px;background:var(--ch);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-16px;border:3px solid var(--white);}
+.bn-plus i{font-size:24px;color:#fff;}
+.feed-tabs{background:var(--white);border-bottom:1px solid var(--border);display:flex;position:sticky;top:0;z-index:40;}
+.ft{flex:1;padding:12px 0;font-size:14px;cursor:pointer;color:var(--t2);border-bottom:3px solid transparent;display:flex;align-items:center;justify-content:center;gap:5px;}
 .ft.act{color:var(--chd);font-weight:500;border-bottom-color:var(--ch);}
-
-/* ── RANGE BAR ── */
-.rbar{background:var(--chl);border-bottom:1px solid var(--chb);padding:8px 14px;display:flex;align-items:center;gap:7px;flex-shrink:0;overflow-x:auto;white-space:nowrap;}
+.rbar{background:var(--chl);border-bottom:1px solid var(--chb);padding:8px 14px;display:flex;align-items:center;gap:7px;overflow-x:auto;white-space:nowrap;}
 .rbar::-webkit-scrollbar{display:none;}
-.rlabel{font-size:11px;color:var(--chdd);font-weight:700;flex-shrink:0;}
-.rpill{padding:4px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--chb);color:var(--chdd);background:transparent;flex-shrink:0;transition:background .12s;}
+.rlbl{font-size:11px;color:var(--chdd);font-weight:700;flex-shrink:0;}
+.rpill{padding:4px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--chb);color:var(--chdd);background:transparent;flex-shrink:0;}
 .rpill.act{background:var(--ch);border-color:var(--ch);color:#fff;font-weight:500;}
-.lchip{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:11px;color:var(--chdd);flex-shrink:0;cursor:pointer;}
-.lchip i{font-size:13px;color:var(--ch);}
-
-/* ── FEED CONTENT ── */
-.feed-body{padding:12px;display:flex;flex-direction:column;gap:10px;}
-
-/* ── EVENT CARDS ── */
-.ev-sec{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:12px;}
-.ev-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.ev-title{font-size:13px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:5px;}
-.ev-title i{color:var(--ch);font-size:15px;}
-.ev-more{font-size:11px;color:var(--chd);cursor:pointer;font-weight:500;}
-.ev-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;}
-.ev-scroll::-webkit-scrollbar{display:none;}
-.evc{min-width:140px;border:1px solid var(--chb);border-radius:10px;padding:10px;background:var(--chl);cursor:pointer;position:relative;flex-shrink:0;transition:border-color .15s;}
-.evc:active{transform:scale(.97);}
-.evbdg{position:absolute;top:7px;right:7px;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;}
-.evtype{font-size:10px;color:var(--chdd);margin-bottom:4px;display:flex;align-items:center;gap:3px;}
-.evtype i{font-size:12px;}
-.evname{font-size:12px;font-weight:500;color:var(--chdd);margin-bottom:2px;line-height:1.35;}
-.evshop{font-size:10px;color:var(--t2);}
-.evdate{font-size:10px;color:var(--t3);margin-top:5px;}
-
-/* ── STATS ── */
-.stats2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.stats-full{margin-top:0;}
+.lchip{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:11px;color:var(--chdd);cursor:pointer;flex-shrink:0;}
+.fbody{padding:12px;display:flex;flex-direction:column;gap:10px;}
+.qsec{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:14px;}
+.qs-t{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:12px;}
+.qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.qi{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;}
+.qi:active .qicon{background:var(--chl);}
+.qicon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--white);transition:background .15s;}
+.qicon i{font-size:24px;}
+.qlbl{font-size:11px;color:var(--t2);text-align:center;}
+.stat-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.stat-hd span{font-size:13px;font-weight:700;color:var(--t1);}
+.stat-hd a{font-size:11px;color:var(--chd);cursor:pointer;font-weight:500;}
+.s2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .sc{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.sc.full{grid-column:1/-1;}
 .slbl{font-size:10px;color:var(--t3);display:flex;align-items:center;gap:4px;margin-bottom:4px;}
 .slbl i{font-size:12px;color:var(--ch);}
 .sval{font-size:18px;font-weight:700;color:var(--t1);}
 .schg{font-size:10px;margin-top:3px;display:flex;align-items:center;gap:2px;}
-.up{color:var(--up);} .dn{color:var(--dn);}
-.sc-full{grid-column:1/-1;}
-
-/* ── WRITE BOX ── */
+.up{color:var(--up);}.dn{color:var(--dn);}
+.aicard{background:var(--chl);border:1px solid var(--chb);border-radius:12px;padding:14px;display:flex;gap:10px;cursor:pointer;}
+.aicat{width:38px;height:38px;border-radius:50%;background:var(--ch);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ailbl{font-size:11px;color:var(--chdd);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.ailbl i{font-size:13px;}
+.aitxt{font-size:13px;color:var(--chdd);line-height:1.6;}
+.evsec{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:12px;}
+.evhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.evt{font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:5px;}
+.evt i{color:var(--ch);font-size:15px;}
+.evm{font-size:11px;color:var(--chd);cursor:pointer;font-weight:500;}
+.evscroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;}
+.evscroll::-webkit-scrollbar{display:none;}
+.evc{min-width:136px;border:1px solid var(--chb);border-radius:10px;padding:10px;background:var(--chl);cursor:pointer;position:relative;flex-shrink:0;}
+.evc:active{transform:scale(.97);}
+.evbdg{position:absolute;top:7px;right:7px;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;}
+.evtype{font-size:10px;color:var(--chdd);margin-bottom:4px;display:flex;align-items:center;gap:3px;}
+.evname{font-size:12px;font-weight:500;color:var(--chdd);margin-bottom:2px;line-height:1.35;}
+.evshop{font-size:10px;color:var(--t2);}
+.evdate{font-size:10px;color:var(--t3);margin-top:5px;}
 .wbox{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px;}
 .wrow{display:flex;align-items:center;gap:9px;}
 .wav{width:34px;height:34px;border-radius:50%;background:var(--chm);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--chdd);flex-shrink:0;}
@@ -99,643 +95,258 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .wacts{display:flex;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);overflow-x:auto;}
 .wacts::-webkit-scrollbar{display:none;}
 .wab{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:8px;font-size:11px;color:var(--t2);cursor:pointer;border:none;background:transparent;white-space:nowrap;flex-shrink:0;}
-.wab:active{background:var(--chl);color:var(--chd);}
 .wab i{font-size:13px;}
 .pbtn{margin-left:auto;background:var(--ch);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:12px;font-weight:500;cursor:pointer;flex-shrink:0;}
-
-/* ── CAT TABS ── */
-.ctabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--white);border-radius:12px 12px 0 0;overflow-x:auto;}
+.ctabs{display:flex;background:var(--white);border-radius:12px 12px 0 0;border-bottom:1px solid var(--border);overflow-x:auto;}
 .ctabs::-webkit-scrollbar{display:none;}
-.ct{padding:9px 14px;font-size:12px;cursor:pointer;color:var(--t2);border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0;transition:color .12s;}
+.ct{padding:9px 14px;font-size:12px;cursor:pointer;color:var(--t2);border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0;}
 .ct.act{color:var(--chd);font-weight:500;border-bottom-color:var(--ch);background:var(--chl);}
-
-/* ── POST CARDS ── */
 .plist{display:flex;flex-direction:column;background:var(--white);border-radius:0 0 12px 12px;border:1px solid var(--border);border-top:none;}
 .pc{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
 .pc:last-child{border-bottom:none;}
 .pc:active{background:var(--chl);}
 .pctop{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
 .pcav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
-.pcname{font-size:12px;font-weight:500;color:var(--t1);}
+.pcnm{font-size:12px;font-weight:500;color:var(--t1);}
 .pcinfo{font-size:10px;color:var(--t3);margin-top:1px;}
 .pcbdg{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:500;margin-left:3px;}
-.pcpin{display:flex;align-items:center;gap:2px;font-size:10px;color:var(--chd);margin-left:auto;}
-.pcpin i{font-size:12px;}
+.pcpin{display:flex;align-items:center;gap:2px;font-size:10px;color:var(--chd);margin-left:auto;flex-shrink:0;}
 .pctit{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;line-height:1.4;}
 .pcbody{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .pcbot{display:flex;align-items:center;gap:12px;}
 .pca{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--t3);cursor:pointer;}
 .pca i{font-size:13px;}
 .pct{margin-left:auto;font-size:10px;color:var(--t3);}
-
-/* ── TRENDING WIDGET (in feed) ── */
-.widget-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px;}
-.wct{font-size:13px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:5px;margin-bottom:8px;}
+.wcard{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px;}
+.wct{font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:5px;margin-bottom:8px;}
 .wct i{font-size:15px;color:var(--ch);}
-.wct-more{margin-left:auto;font-size:11px;color:var(--chd);font-weight:400;cursor:pointer;}
+.wct-m{margin-left:auto;font-size:11px;color:var(--chd);font-weight:400;cursor:pointer;}
 .tri{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--border);}
 .tri:last-child{border-bottom:none;}
 .trr{font-size:13px;font-weight:700;color:var(--ch);min-width:14px;}
 .trt{font-size:12px;color:var(--t1);flex:1;}
 .trtg{font-size:10px;padding:2px 6px;border-radius:10px;background:var(--chl);color:var(--chdd);}
-.hoti{display:flex;align-items:flex-start;gap:7px;padding:6px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.hoti{display:flex;gap:7px;padding:6px 0;border-bottom:1px solid var(--border);cursor:pointer;}
 .hoti:last-child{border-bottom:none;}
-.hotn{font-size:15px;font-weight:700;color:var(--chb);min-width:18px;line-height:1.3;}
+.hotn{font-size:15px;font-weight:700;color:var(--chb);min-width:18px;}
 .hott{font-size:12px;color:var(--t1);line-height:1.4;flex:1;}
 .hotc{font-size:10px;color:var(--t3);margin-top:2px;}
-
-/* ── AI SCREEN ── */
-.ai-screen-wrap{display:flex;flex-direction:column;height:100%;}
-.ai-header{background:var(--ch);padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.ai-hcat{font-size:26px;}
-.ai-htit{font-size:15px;font-weight:700;color:#fff;}
-.ai-hsub{font-size:11px;color:rgba(255,255,255,.85);}
+.ai-sw{display:flex;flex-direction:column;height:100%;}
+.ai-sh{background:var(--ch);padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.ai-shc{width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ai-sht{font-size:15px;font-weight:700;color:#fff;}
+.ai-shs{font-size:11px;color:rgba(255,255,255,.85);}
+.aichips{padding:8px 14px;display:flex;gap:6px;overflow-x:auto;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0;}
+.aichips::-webkit-scrollbar{display:none;}
+.aichip{padding:6px 12px;border-radius:20px;font-size:11px;border:1px solid var(--chb);color:var(--chdd);background:var(--chl);white-space:nowrap;cursor:pointer;flex-shrink:0;}
 .ai-msgs{flex:1;padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;background:var(--chl);}
 .mbot{background:var(--white);border-radius:0 12px 12px 12px;padding:10px 12px;font-size:13px;color:var(--chdd);line-height:1.6;border:1px solid var(--chb);align-self:flex-start;max-width:88%;}
 .musr{background:var(--ch);border-radius:12px 0 12px 12px;padding:10px 12px;font-size:13px;color:#fff;line-height:1.6;align-self:flex-end;max-width:82%;}
-.ai-input-area{background:var(--white);border-top:1px solid var(--chb);padding:10px 14px;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.ai-ia{background:var(--white);border-top:1px solid var(--chb);padding:10px 14px;display:flex;gap:8px;align-items:center;flex-shrink:0;}
 .ai-inp{flex:1;background:#F5F1E8;border:1px solid var(--border);border-radius:20px;padding:10px 14px;font-size:13px;color:var(--t1);outline:none;font-family:inherit;}
 .ai-inp:focus{border-color:var(--ch);}
-.ai-micb{background:transparent;border:1px solid var(--ch);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
-.ai-micb i{color:var(--chd);font-size:18px;}
-.ai-sndb{background:var(--ch);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
-.ai-sndb i{color:#fff;font-size:18px;}
-.ai-chips{padding:0 14px 10px;display:flex;gap:6px;overflow-x:auto;flex-shrink:0;}
-.ai-chips::-webkit-scrollbar{display:none;}
-.aichip{padding:6px 12px;border-radius:20px;font-size:11px;border:1px solid var(--chb);color:var(--chdd);background:var(--chl);white-space:nowrap;cursor:pointer;flex-shrink:0;}
-.aichip:active{background:var(--ch);color:#fff;border-color:var(--ch);}
-
-/* ── PROFILE SCREEN ── */
-.profile-header{background:var(--ch);padding:24px 16px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;}
-.prof-av{width:70px;height:70px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--chdd);border:3px solid rgba(255,255,255,.6);}
-.prof-name{font-size:18px;font-weight:700;color:#fff;}
-.prof-type{font-size:12px;color:rgba(255,255,255,.85);}
-.prof-stats{display:flex;gap:0;background:var(--white);border-bottom:1px solid var(--border);}
-.ps-item{flex:1;padding:14px 0;text-align:center;border-right:1px solid var(--border);}
-.ps-item:last-child{border-right:none;}
-.ps-val{font-size:18px;font-weight:700;color:var(--chd);}
-.ps-lbl{font-size:10px;color:var(--t3);margin-top:2px;}
-.prof-menu{background:var(--white);margin:10px;border-radius:12px;border:1px solid var(--border);overflow:hidden;}
-.pm-item{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--t1);}
-.pm-item:last-child{border-bottom:none;}
-.pm-item i{font-size:18px;color:var(--ch);}
-.pm-item .arr{margin-left:auto;color:var(--t3);font-size:16px;}
-.pm-badge{margin-left:auto;background:var(--ch);color:#fff;font-size:10px;border-radius:10px;padding:1px 7px;font-weight:700;}
-
-/* ── SEARCH SCREEN ── */
-.search-bar-full{padding:12px 14px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
-.sbf-inp{flex:1;background:#F5F1E8;border:1px solid var(--border);border-radius:20px;padding:9px 14px;font-size:13px;color:var(--t1);outline:none;font-family:inherit;}
-.sbf-inp:focus{border-color:var(--ch);}
-.sbf-mic{background:var(--ch);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
-.sbf-mic i{color:#fff;font-size:17px;}
-.search-recent{padding:12px 14px;}
-.sr-title{font-size:12px;font-weight:700;color:var(--t3);margin-bottom:8px;display:flex;justify-content:space-between;}
+.ai-mb{background:transparent;border:1px solid var(--ch);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.ai-mb i{color:var(--chd);font-size:18px;}
+.ai-sb{background:var(--ch);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.ai-sb i{color:#fff;font-size:18px;}
+.srch-full{padding:12px 14px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.srch-inp{flex:1;background:#F5F1E8;border:1px solid var(--border);border-radius:20px;padding:9px 14px;font-size:13px;color:var(--t1);outline:none;font-family:inherit;}
+.srch-inp:focus{border-color:var(--ch);}
+.srch-mic{background:var(--ch);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.srch-mic i{color:#fff;font-size:17px;}
+.sr-t{font-size:12px;font-weight:700;color:var(--t3);margin-bottom:8px;display:flex;justify-content:space-between;}
 .sr-clr{font-size:11px;color:var(--chd);cursor:pointer;font-weight:400;}
 .sr-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .sr-tag{padding:5px 12px;border-radius:20px;font-size:12px;border:1px solid var(--border);color:var(--t2);background:var(--white);cursor:pointer;}
-.sr-tag:active{background:var(--chl);color:var(--chd);border-color:var(--chb);}
-
-/* ── MODAL / OVERLAY ── */
+.prof-hd{background:var(--ch);padding:24px 16px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.prof-av{width:70px;height:70px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--chdd);border:3px solid rgba(255,255,255,.6);}
+.prof-nm{font-size:18px;font-weight:700;color:#fff;}
+.prof-tp{font-size:12px;color:rgba(255,255,255,.85);}
+.prof-stats{display:flex;background:var(--white);border-bottom:1px solid var(--border);}
+.ps-i{flex:1;padding:14px 0;text-align:center;border-right:1px solid var(--border);}
+.ps-i:last-child{border-right:none;}
+.ps-v{font-size:18px;font-weight:700;color:var(--chd);}
+.ps-l{font-size:10px;color:var(--t3);margin-top:2px;}
+.pmenu{background:var(--white);margin:10px;border-radius:12px;border:1px solid var(--border);overflow:hidden;}
+.pm-i{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--t1);}
+.pm-i:last-child{border-bottom:none;}
+.pm-i i{font-size:18px;color:var(--ch);}
+.pm-arr{margin-left:auto;color:var(--t3);font-size:16px;}
+.pm-bdg{margin-left:auto;background:var(--ch);color:#fff;font-size:10px;border-radius:10px;padding:1px 7px;font-weight:700;}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:flex-end;}
 .overlay.open{display:flex;}
 .sheet{background:var(--white);border-radius:20px 20px 0 0;width:100%;max-width:430px;margin:0 auto;padding:20px 16px 34px;}
-.sheet-handle{width:36px;height:4px;background:var(--border);border-radius:4px;margin:0 auto 16px;}
-.sheet-title{font-size:16px;font-weight:700;color:var(--t1);margin-bottom:14px;}
+.sh-hd{width:36px;height:4px;background:var(--border);border-radius:4px;margin:0 auto 16px;}
+.sh-t{font-size:16px;font-weight:700;color:var(--t1);margin-bottom:14px;}
 .sheet textarea{width:100%;border:1px solid var(--border);border-radius:12px;padding:12px;font-size:13px;color:var(--t1);font-family:inherit;resize:none;height:120px;outline:none;background:#F5F1E8;}
 .sheet textarea:focus{border-color:var(--ch);background:var(--white);}
-.sheet-acts{display:flex;gap:6px;margin-top:10px;overflow-x:auto;}
-.sheet-acts::-webkit-scrollbar{display:none;}
+.sh-acts{display:flex;gap:6px;margin-top:10px;overflow-x:auto;}
+.sh-acts::-webkit-scrollbar{display:none;}
 .sab{display:flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;font-size:12px;color:var(--t2);cursor:pointer;border:1px solid var(--border);background:transparent;white-space:nowrap;flex-shrink:0;}
 .sab i{font-size:14px;}
-.sheet-submit{width:100%;background:var(--ch);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:500;cursor:pointer;margin-top:12px;}
-
-/* ── TOAST ── */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(26,26,26,.9);color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;opacity:0;pointer-events:none;transition:all .25s;z-index:200;white-space:nowrap;}
+.sh-sub{width:100%;background:var(--ch);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:500;cursor:pointer;margin-top:12px;}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(26,26,26,.92);color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;opacity:0;pointer-events:none;transition:all .25s;z-index:300;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* ── VOICE INDICATOR ── */
-.voice-fab{position:fixed;bottom:72px;right:16px;background:var(--ch);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:90;border:none;transition:transform .15s;}
-.voice-fab:active{transform:scale(.93);}
-.voice-fab i{color:#fff;font-size:22px;}
 </style>
 </head>
 <body>
-
 <div class="app">
-
-  <!-- TOP BAR -->
-  <div class="topbar" id="topbar">
-    <div class="tb-logo">
-      <div class="tb-cat">😼</div>
-      <span class="tb-name">골목대장</span>
+  <div class="topbar">
+    <div class="tb-main">
+      <div class="tb-logo">
+        <div class="tb-cat">😼</div>
+        <div><div class="tb-name">골목대장</div><div class="tb-sub">소상공인 상권분석 커뮤니티</div></div>
+      </div>
+      <div class="tb-icons">
+        <div class="tbi dot"><i class="ti ti-bell"></i></div>
+        <div class="tbi"><i class="ti ti-menu-2"></i></div>
+      </div>
     </div>
-    <div class="tb-icons">
-      <div class="tbi" id="btn-search-open"><i class="ti ti-search"></i></div>
-      <div class="tbi has-dot"><i class="ti ti-bell"></i></div>
-      <div class="tbi"><i class="ti ti-menu-2"></i></div>
-    </div>
+    <div class="loc-bar"><i class="ti ti-map-pin"></i><span>경기도 화성시 동탄</span><i class="ti ti-chevron-down cv"></i></div>
+    <div class="srch-wrap" id="open-search"><i class="ti ti-search si"></i><span>상권, 업종, 질문을 검색하세요</span><i class="ti ti-microphone mic"></i></div>
   </div>
 
-  <!-- SCREENS -->
   <div class="screens">
 
-    <!-- ══ HOME SCREEN ══ -->
+    <!-- 홈 -->
     <div class="screen active" id="screen-home">
       <div class="feed-tabs">
         <div class="ft" id="tab-all"><i class="ti ti-world"></i> 전체글</div>
         <div class="ft act" id="tab-dong"><i class="ti ti-map-pin"></i> 우리동네</div>
       </div>
       <div class="rbar" id="rbar">
-        <span class="rlabel">동네 범위</span>
-        <div class="rpill act" data-range="우리동네">우리동네</div>
-        <div class="rpill" data-range="인근동네">인근 동네</div>
-        <div class="rpill" data-range="전체지역">전체 지역</div>
-        <div class="lchip"><i class="ti ti-map-pin"></i> 동탄2동 <i class="ti ti-chevron-down"></i></div>
+        <span class="rlbl">동네 범위</span>
+        <div class="rpill act" data-r="우리동네">우리동네</div>
+        <div class="rpill" data-r="인근동네">인근 동네</div>
+        <div class="rpill" data-r="전체지역">전체 지역</div>
+        <div class="lchip"><i class="ti ti-map-pin"></i>동탄2동<i class="ti ti-chevron-down"></i></div>
       </div>
-
-      <div class="feed-body">
-
-        <!-- 이벤트 섹션 -->
-        <div class="ev-sec" id="ev-sec">
-          <div class="ev-head">
-            <span class="ev-title"><i class="ti ti-speakerphone"></i> 이번 주 우리동네</span>
-            <span class="ev-more">전체보기</span>
-          </div>
-          <div class="ev-scroll">
-            <div class="evc">
-              <span class="evbdg" style="background:var(--ch);">D-3</span>
-              <div class="evtype"><i class="ti ti-discount"></i> 할인이벤트</div>
-              <div class="evname">오픈 1주년 기념<br>전 메뉴 20% 할인</div>
-              <div class="evshop">동탄 맛있는 김밥집</div>
-              <div class="evdate">~06.04(화)</div>
-            </div>
-            <div class="evc">
-              <span class="evbdg" style="background:#1D9E75;">모집</span>
-              <div class="evtype"><i class="ti ti-shopping-cart"></i> 공동구매</div>
-              <div class="evname">식자재 공동구매<br>사장님 모집</div>
-              <div class="evshop">동탄 사장님 모임</div>
-              <div class="evdate">~06.08(토)</div>
-            </div>
-            <div class="evc">
-              <span class="evbdg" style="background:#E24B4A;">긴급</span>
-              <div class="evtype"><i class="ti ti-alert-circle"></i> 애로사항</div>
-              <div class="evname">도로공사로 인한<br>접근성 차단 문제</div>
-              <div class="evshop">동탄 센트럴 상가</div>
-              <div class="evdate">진행 중</div>
-            </div>
-            <div class="evc">
-              <span class="evbdg" style="background:#378ADD;">행사</span>
-              <div class="evtype"><i class="ti ti-users"></i> 모임·행사</div>
-              <div class="evname">동탄 소상공인<br>네트워킹 모임</div>
-              <div class="evshop">동탄2 커뮤니티센터</div>
-              <div class="evdate">06.10(월) 오후 7시</div>
-            </div>
+      <div class="fbody">
+        <!-- 빠른 메뉴 -->
+        <div class="qsec">
+          <div class="qs-t">빠른 메뉴</div>
+          <div class="qgrid">
+            <div class="qi" onclick="showToast('상권분석')"><div class="qicon"><i class="ti ti-map" style="color:var(--ch);"></i></div><span class="qlbl">상권분석</span></div>
+            <div class="qi" onclick="showToast('창업기상도')"><div class="qicon"><i class="ti ti-cloud" style="color:var(--info);"></i></div><span class="qlbl">창업기상도</span></div>
+            <div class="qi" onclick="showToast('핫플레이스')"><div class="qicon"><i class="ti ti-flame" style="color:var(--dn);"></i></div><span class="qlbl">핫플레이스</span></div>
+            <div class="qi" onclick="showToast('정책지원')"><div class="qicon"><i class="ti ti-file-text" style="color:var(--up);"></i></div><span class="qlbl">정책지원</span></div>
           </div>
         </div>
-
         <!-- 상권 통계 -->
-        <div class="stats2">
-          <div class="sc">
-            <div class="slbl"><i class="ti ti-users"></i> 일 평균 유동인구</div>
-            <div class="sval">31.6만명</div>
-            <div class="schg up"><i class="ti ti-trending-up"></i> +17.7% 전월</div>
-          </div>
-          <div class="sc">
-            <div class="slbl"><i class="ti ti-chart-bar"></i> 월 평균 매출</div>
-            <div class="sval">1,316만</div>
-            <div class="schg dn"><i class="ti ti-trending-down"></i> -2.2% 전년</div>
-          </div>
-          <div class="sc sc-full">
-            <div class="slbl"><i class="ti ti-store"></i> 동종 업소수 (요리주점)</div>
-            <div class="sval">175개</div>
-            <div class="schg dn"><i class="ti ti-trending-down"></i> -17.8% 전년 대비</div>
+        <div><div class="stat-hd"><span>우리 동네 상권 현황</span><a>자세히 보기</a></div>
+          <div class="s2">
+            <div class="sc"><div class="slbl"><i class="ti ti-users"></i>일 평균 유동인구</div><div class="sval">31.6만명</div><div class="schg up"><i class="ti ti-trending-up"></i>전월 대비 +17.7%</div></div>
+            <div class="sc"><div class="slbl"><i class="ti ti-chart-bar"></i>월 평균 매출</div><div class="sval">1,316만원</div><div class="schg dn"><i class="ti ti-trending-down"></i>전년 대비 -2.2%</div></div>
+            <div class="sc full"><div class="slbl"><i class="ti ti-store"></i>동종 업소수 (요리주점)</div><div class="sval">175개</div><div class="schg dn"><i class="ti ti-trending-down"></i>전년 대비 -17.8%</div></div>
           </div>
         </div>
-
+        <!-- AI 분석 -->
+        <div class="aicard" id="go-ai"><div class="aicat">😼</div><div><div class="ailbl"><i class="ti ti-robot"></i>골목대장 AI 분석</div><div class="aitxt">이 상권 요리주점 업종은 전년 대비 매출이 감소하고 있어요. 피크타임은 금요일 18~23시예요. 지금이 오히려 진입 타이밍일 수 있어요!</div></div></div>
+        <!-- 이벤트 -->
+        <div class="evsec" id="ev-sec">
+          <div class="evhd"><span class="evt"><i class="ti ti-speakerphone"></i>이번 주 우리동네 이벤트·애로사항</span><span class="evm">전체보기</span></div>
+          <div class="evscroll">
+            <div class="evc"><span class="evbdg" style="background:var(--ch);">D-3</span><div class="evtype"><i class="ti ti-discount"></i>할인이벤트</div><div class="evname">오픈 1주년 기념<br>전 메뉴 20% 할인</div><div class="evshop">동탄 맛있는 김밥집</div><div class="evdate">~06.04(화)</div></div>
+            <div class="evc"><span class="evbdg" style="background:#1D9E75;">모집</span><div class="evtype"><i class="ti ti-shopping-cart"></i>공동구매</div><div class="evname">식자재 공동구매<br>사장님 모집</div><div class="evshop">동탄 사장님 모임</div><div class="evdate">~06.08(토)</div></div>
+            <div class="evc"><span class="evbdg" style="background:#E24B4A;">긴급</span><div class="evtype"><i class="ti ti-alert-circle"></i>애로사항</div><div class="evname">도로공사 인한<br>접근성 차단 문제</div><div class="evshop">동탄 센트럴 상가</div><div class="evdate">진행 중</div></div>
+            <div class="evc"><span class="evbdg" style="background:#378ADD;">행사</span><div class="evtype"><i class="ti ti-users"></i>모임·행사</div><div class="evname">동탄 소상공인<br>네트워킹 모임</div><div class="evshop">동탄2 커뮤니티센터</div><div class="evdate">06.10(월) 7시</div></div>
+          </div>
+        </div>
         <!-- 글쓰기 -->
-        <div class="wbox">
-          <div class="wrow">
-            <div class="wav">김</div>
-            <div class="winp" id="open-write">사장님들과 이야기 나눠보세요...</div>
-          </div>
-          <div class="wacts">
-            <button class="wab"><i class="ti ti-photo"></i> 사진</button>
-            <button class="wab"><i class="ti ti-map-pin"></i> 위치</button>
-            <button class="wab"><i class="ti ti-tag"></i> 업종태그</button>
-            <button class="wab"><i class="ti ti-speakerphone"></i> 이벤트</button>
-            <button class="pbtn" id="open-write-btn">게시</button>
-          </div>
+        <div class="wbox"><div class="wrow"><div class="wav">김</div><div class="winp" id="open-write">사장님들과 이야기 나눠보세요...</div></div>
+          <div class="wacts"><button class="wab"><i class="ti ti-photo"></i>사진</button><button class="wab"><i class="ti ti-map-pin"></i>위치</button><button class="wab"><i class="ti ti-tag"></i>업종태그</button><button class="wab"><i class="ti ti-speakerphone"></i>이벤트</button><button class="pbtn" id="open-write-btn">게시</button></div>
         </div>
-
         <!-- 게시글 -->
         <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);">
-          <div class="ctabs">
-            <div class="ct act" data-cat="all">전체</div>
-            <div class="ct" data-cat="qna">질문·고민</div>
-            <div class="ct" data-cat="info">정보공유</div>
-            <div class="ct" data-cat="startup">창업준비</div>
-            <div class="ct" data-cat="issue">애로사항</div>
-            <div class="ct" data-cat="event">이벤트</div>
-          </div>
-          <div class="plist" id="post-list">
-            <div class="pc" data-cat="qna">
-              <div class="pctop">
-                <div class="pcav" style="background:#FAEEDA;color:#633806;">김</div>
-                <div>
-                  <span class="pcname">김사장님</span>
-                  <span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·주점</span>
-                  <div class="pcinfo">화성 동탄 · 팔로워 128명</div>
-                </div>
-                <span class="pcpin"><i class="ti ti-map-pin"></i> 동탄2동</span>
-              </div>
-              <div class="pctit">임대료 인상 통보 거부할 수 있나요?</div>
-              <div class="pcbody">건물주가 갑자기 임대료를 20% 올린다고 통보했는데 계약서에는 아무 내용이 없었거든요. 법적으로 거부 가능한지 아시는 분 조언 부탁드려요.</div>
-              <div class="pcbot">
-                <span class="pca like-btn"><i class="ti ti-heart"></i> <span class="cnt">32</span></span>
-                <span class="pca"><i class="ti ti-message-circle"></i> 14</span>
-                <span class="pca save-btn"><i class="ti ti-bookmark"></i></span>
-                <span class="pca"><i class="ti ti-share"></i></span>
-                <span class="pct">12분 전</span>
-              </div>
-            </div>
-            <div class="pc" data-cat="info">
-              <div class="pctop">
-                <div class="pcav" style="background:#E1F5EE;color:#085041;">박</div>
-                <div>
-                  <span class="pcname">박사장님</span>
-                  <span class="pcbdg" style="background:#E1F5EE;color:#085041;">카페·디저트</span>
-                  <div class="pcinfo">화성 동탄 · 팔로워 89명</div>
-                </div>
-                <span class="pcpin"><i class="ti ti-map-pin"></i> 동탄1동</span>
-              </div>
-              <div class="pctit">신규 아파트 입주 후 상권 변화 체감하시나요?</div>
-              <div class="pcbody">최근 동탄 신규 입주 완공 후 점심 손님이 확 늘었어요. 상권 데이터 어디서 보시는지 아시는 분 계세요?</div>
-              <div class="pcbot">
-                <span class="pca like-btn"><i class="ti ti-heart"></i> <span class="cnt">58</span></span>
-                <span class="pca"><i class="ti ti-message-circle"></i> 27</span>
-                <span class="pca save-btn"><i class="ti ti-bookmark"></i></span>
-                <span class="pca"><i class="ti ti-share"></i></span>
-                <span class="pct">1시간 전</span>
-              </div>
-            </div>
-            <div class="pc" data-cat="qna">
-              <div class="pctop">
-                <div class="pcav" style="background:#E6F1FB;color:#0C447C;">이</div>
-                <div>
-                  <span class="pcname">이사장님</span>
-                  <span class="pcbdg" style="background:#E6F1FB;color:#0C447C;">소매·편의점</span>
-                  <div class="pcinfo">수원 팔달 · 팔로워 214명</div>
-                </div>
-                <span class="pcpin"><i class="ti ti-map-pin"></i> 인계동</span>
-              </div>
-              <div class="pctit">폐업 고민 중인데 솔직한 조언 부탁드려요</div>
-              <div class="pcbody">3년째 운영 중인데 매달 적자예요. 버텨야 할지 정리할지 너무 힘드네요. 비슷한 경험 있으신 분들 어떻게 결정하셨나요?</div>
-              <div class="pcbot">
-                <span class="pca like-btn"><i class="ti ti-heart"></i> <span class="cnt">103</span></span>
-                <span class="pca"><i class="ti ti-message-circle"></i> 41</span>
-                <span class="pca save-btn"><i class="ti ti-bookmark"></i></span>
-                <span class="pca"><i class="ti ti-share"></i></span>
-                <span class="pct">3시간 전</span>
-              </div>
-            </div>
-            <div class="pc" data-cat="issue">
-              <div class="pctop">
-                <div class="pcav" style="background:#FAEEDA;color:#633806;">최</div>
-                <div>
-                  <span class="pcname">최사장님</span>
-                  <span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·치킨</span>
-                  <div class="pcinfo">화성 동탄 · 팔로워 67명</div>
-                </div>
-                <span class="pcpin"><i class="ti ti-map-pin"></i> 동탄2동</span>
-              </div>
-              <div class="pctit">도로공사로 손님이 반토막 났어요</div>
-              <div class="pcbody">앞 도로 공사가 두 달째인데 매출이 반으로 줄었어요. 구청 민원도 묵묵부답이고... 어떻게 대응하셨나요?</div>
-              <div class="pcbot">
-                <span class="pca like-btn"><i class="ti ti-heart"></i> <span class="cnt">76</span></span>
-                <span class="pca"><i class="ti ti-message-circle"></i> 33</span>
-                <span class="pca save-btn"><i class="ti ti-bookmark"></i></span>
-                <span class="pca"><i class="ti ti-share"></i></span>
-                <span class="pct">5시간 전</span>
-              </div>
-            </div>
-            <div class="pc" data-cat="startup">
-              <div class="pctop">
-                <div class="pcav" style="background:#EEEDFE;color:#3C3489;">정</div>
-                <div>
-                  <span class="pcname">정예비사장</span>
-                  <span class="pcbdg" style="background:#EEEDFE;color:#3C3489;">창업준비</span>
-                  <div class="pcinfo">화성 동탄 · 팔로워 12명</div>
-                </div>
-                <span class="pcpin"><i class="ti ti-map-pin"></i> 동탄2동</span>
-              </div>
-              <div class="pctit">동탄2동 카페 창업 자리 추천해주실 분?</div>
-              <div class="pcbody">1억 초반대로 소형 카페 창업 준비 중이에요. 유동인구 많고 임대료 적당한 자리 추천 부탁드려요!</div>
-              <div class="pcbot">
-                <span class="pca like-btn"><i class="ti ti-heart"></i> <span class="cnt">45</span></span>
-                <span class="pca"><i class="ti ti-message-circle"></i> 22</span>
-                <span class="pca save-btn"><i class="ti ti-bookmark"></i></span>
-                <span class="pca"><i class="ti ti-share"></i></span>
-                <span class="pct">어제</span>
-              </div>
-            </div>
+          <div class="ctabs"><div class="ct act" data-cat="all">전체</div><div class="ct" data-cat="qna">질문·고민</div><div class="ct" data-cat="info">정보공유</div><div class="ct" data-cat="startup">창업준비</div><div class="ct" data-cat="issue">애로사항</div><div class="ct" data-cat="event">이벤트</div></div>
+          <div class="plist">
+            <div class="pc" data-cat="qna"><div class="pctop"><div class="pcav" style="background:#FAEEDA;color:#633806;">김</div><div><span class="pcnm">김사장님</span><span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·주점</span><div class="pcinfo">화성 동탄 · 팔로워 128명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">임대료 인상 통보 거부할 수 있나요?</div><div class="pcbody">건물주가 갑자기 임대료를 20% 올린다고 통보했는데 계약서에는 아무 내용이 없었거든요. 법적으로 거부 가능한지 조언 부탁드려요.</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">32</span></span><span class="pca"><i class="ti ti-message-circle"></i>14</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">12분 전</span></div></div>
+            <div class="pc" data-cat="info"><div class="pctop"><div class="pcav" style="background:#E1F5EE;color:#085041;">박</div><div><span class="pcnm">박사장님</span><span class="pcbdg" style="background:#E1F5EE;color:#085041;">카페·디저트</span><div class="pcinfo">화성 동탄 · 팔로워 89명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄1동</span></div><div class="pctit">신규 아파트 입주 후 상권 변화 체감하시나요?</div><div class="pcbody">최근 동탄 신규 입주 완공 후 점심 손님이 확 늘었어요. 상권 데이터 어디서 보시는지 아시는 분 계세요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">58</span></span><span class="pca"><i class="ti ti-message-circle"></i>27</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">1시간 전</span></div></div>
+            <div class="pc" data-cat="qna"><div class="pctop"><div class="pcav" style="background:#E6F1FB;color:#0C447C;">이</div><div><span class="pcnm">이사장님</span><span class="pcbdg" style="background:#E6F1FB;color:#0C447C;">소매·편의점</span><div class="pcinfo">수원 팔달 · 팔로워 214명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>인계동</span></div><div class="pctit">폐업 고민 중인데 솔직한 조언 부탁드려요</div><div class="pcbody">3년째 운영 중인데 매달 적자예요. 버텨야 할지 정리할지 너무 힘드네요. 비슷한 경험 있으신 분들 어떻게 결정하셨나요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">103</span></span><span class="pca"><i class="ti ti-message-circle"></i>41</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">3시간 전</span></div></div>
+            <div class="pc" data-cat="issue"><div class="pctop"><div class="pcav" style="background:#FAEEDA;color:#633806;">최</div><div><span class="pcnm">최사장님</span><span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·치킨</span><div class="pcinfo">화성 동탄 · 팔로워 67명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">도로공사로 손님이 반토막 났어요</div><div class="pcbody">앞 도로 공사가 두 달째인데 매출이 반으로 줄었어요. 구청 민원도 묵묵부답이고 어떻게 대응하셨나요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">76</span></span><span class="pca"><i class="ti ti-message-circle"></i>33</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">5시간 전</span></div></div>
+            <div class="pc" data-cat="startup"><div class="pctop"><div class="pcav" style="background:#EEEDFE;color:#3C3489;">정</div><div><span class="pcnm">정예비사장</span><span class="pcbdg" style="background:#EEEDFE;color:#3C3489;">창업준비</span><div class="pcinfo">화성 동탄 · 팔로워 12명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">동탄2동 카페 창업 자리 추천해주실 분?</div><div class="pcbody">1억 초반대 소형 카페 창업 준비 중이에요. 유동인구 많고 임대료 적당한 자리 추천 부탁드려요!</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">45</span></span><span class="pca"><i class="ti ti-message-circle"></i>22</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">어제</span></div></div>
           </div>
         </div>
-
-        <!-- 인기 상권 위젯 -->
-        <div class="widget-card">
-          <div class="wct"><i class="ti ti-trending-up"></i> 인기 검색 상권 <span class="wct-more">더보기</span></div>
-          <div class="tri"><span class="trr">1</span><span class="trt">동탄 센트럴파크</span><span class="trtg">급상승</span></div>
-          <div class="tri"><span class="trr">2</span><span class="trt">수원 행궁동</span><span class="trtg">인기</span></div>
-          <div class="tri"><span class="trr">3</span><span class="trt">화성 봉담읍</span><span class="trtg">신규</span></div>
-          <div class="tri"><span class="trr">4</span><span class="trt">수원 인계동</span></div>
-          <div class="tri"><span class="trr">5</span><span class="trt">오산 세마동</span></div>
-        </div>
-
-        <!-- 뜨는 글 위젯 -->
-        <div class="widget-card" style="margin-bottom:12px;">
-          <div class="wct"><i class="ti ti-flame"></i> 지금 뜨는 글 <span class="wct-more">전체보기</span></div>
-          <div class="hoti"><span class="hotn">01</span><div><div class="hott">식자재 공동구매 함께 할 사장님 모집해요</div><div class="hotc">공감 88 · 댓글 34</div></div></div>
-          <div class="hoti"><span class="hotn">02</span><div><div class="hott">소상공인 전기료 지원 신청 기간 연장</div><div class="hotc">공감 71 · 댓글 19</div></div></div>
-          <div class="hoti"><span class="hotn">03</span><div><div class="hott">배달앱 수수료 협상 성공 후기 공유합니다</div><div class="hotc">공감 64 · 댓글 52</div></div></div>
-        </div>
-
+        <div class="wcard"><div class="wct"><i class="ti ti-trending-up"></i>인기 검색 상권<span class="wct-m">더보기</span></div><div class="tri"><span class="trr">1</span><span class="trt">동탄 센트럴파크</span><span class="trtg">급상승</span></div><div class="tri"><span class="trr">2</span><span class="trt">수원 행궁동</span><span class="trtg">인기</span></div><div class="tri"><span class="trr">3</span><span class="trt">화성 봉담읍</span><span class="trtg">신규</span></div><div class="tri"><span class="trr">4</span><span class="trt">수원 인계동</span></div><div class="tri"><span class="trr">5</span><span class="trt">오산 세마동</span></div></div>
+        <div class="wcard" style="margin-bottom:12px;"><div class="wct"><i class="ti ti-flame"></i>지금 뜨는 글<span class="wct-m">전체보기</span></div><div class="hoti"><span class="hotn">01</span><div><div class="hott">식자재 공동구매 함께 할 사장님 모집해요</div><div class="hotc">공감 88 · 댓글 34</div></div></div><div class="hoti"><span class="hotn">02</span><div><div class="hott">소상공인 전기료 지원 신청 기간 연장</div><div class="hotc">공감 71 · 댓글 19</div></div></div><div class="hoti"><span class="hotn">03</span><div><div class="hott">배달앱 수수료 협상 성공 후기</div><div class="hotc">공감 64 · 댓글 52</div></div></div></div>
       </div>
     </div>
 
-    <!-- ══ SEARCH SCREEN ══ -->
+    <!-- 검색 -->
     <div class="screen" id="screen-search">
-      <div class="search-bar-full">
-        <input class="sbf-inp" id="search-inp" type="text" placeholder="상권, 업종, 질문 검색...">
-        <button class="sbf-mic"><i class="ti ti-microphone"></i></button>
-      </div>
+      <div class="srch-full"><input class="srch-inp" id="srch-inp" type="text" placeholder="상권, 업종, 질문 검색..."><button class="srch-mic"><i class="ti ti-microphone"></i></button></div>
       <div style="padding:12px;display:flex;flex-direction:column;gap:12px;">
-        <div class="search-recent">
-          <div class="sr-title">최근 검색 <span class="sr-clr">전체삭제</span></div>
-          <div class="sr-tags">
-            <div class="sr-tag">동탄 요리주점</div>
-            <div class="sr-tag">임대료 인상</div>
-            <div class="sr-tag">카페 창업</div>
-            <div class="sr-tag">소상공인 지원금</div>
-            <div class="sr-tag">배달앱 수수료</div>
-          </div>
-        </div>
-        <div class="widget-card">
-          <div class="wct"><i class="ti ti-trending-up"></i> 인기 검색어</div>
-          <div class="tri"><span class="trr">1</span><span class="trt">동탄 창업 자리 추천</span><span class="trtg">급상승</span></div>
-          <div class="tri"><span class="trr">2</span><span class="trt">소상공인 전기료 지원</span><span class="trtg">인기</span></div>
-          <div class="tri"><span class="trr">3</span><span class="trt">임대료 계약서</span></div>
-          <div class="tri"><span class="trr">4</span><span class="trt">수원 행궁동 상권</span></div>
-          <div class="tri"><span class="trr">5</span><span class="trt">카페 창업 비용</span></div>
-        </div>
+        <div><div class="sr-t">최근 검색<span class="sr-clr">전체삭제</span></div><div class="sr-tags"><div class="sr-tag">동탄 요리주점</div><div class="sr-tag">임대료 인상</div><div class="sr-tag">카페 창업</div><div class="sr-tag">소상공인 지원금</div><div class="sr-tag">배달앱 수수료</div></div></div>
+        <div class="wcard"><div class="wct"><i class="ti ti-trending-up"></i>인기 검색어</div><div class="tri"><span class="trr">1</span><span class="trt">동탄 창업 자리 추천</span><span class="trtg">급상승</span></div><div class="tri"><span class="trr">2</span><span class="trt">소상공인 전기료 지원</span><span class="trtg">인기</span></div><div class="tri"><span class="trr">3</span><span class="trt">임대료 계약서</span></div><div class="tri"><span class="trr">4</span><span class="trt">수원 행궁동 상권</span></div><div class="tri"><span class="trr">5</span><span class="trt">카페 창업 비용</span></div></div>
       </div>
     </div>
 
-    <!-- ══ AI SCREEN ══ -->
+    <!-- AI -->
     <div class="screen" id="screen-ai">
-      <div class="ai-screen-wrap">
-        <div class="ai-header">
-          <div class="ai-hcat">😼</div>
-          <div>
-            <div class="ai-htit">골목대장 AI 검색</div>
-            <div class="ai-hsub">상권·창업 무엇이든 물어보세요</div>
-          </div>
-        </div>
-        <div class="ai-chips">
-          <div class="aichip">유동인구 많은 곳 찾아줘</div>
-          <div class="aichip">임대료 싼 상권은?</div>
-          <div class="aichip">카페 창업 적합 지역</div>
-          <div class="aichip">폐업률 낮은 업종</div>
-          <div class="aichip">이번달 지원금 알려줘</div>
-        </div>
-        <div class="ai-msgs" id="ai-messages">
-          <div class="mbot">안녕하세요 사장님! 동탄 상권이나 창업에 대해 궁금한 것 편하게 물어보세요.</div>
-          <div class="musr">유동인구 많은 곳 찾아줘</div>
-          <div class="mbot">업종이 어떻게 되세요? 음식점, 카페, 소매 중 선택해 주시면 맞춤 분석 드릴게요!</div>
-        </div>
-        <div class="ai-input-area">
-          <div class="ai-micb"><i class="ti ti-microphone"></i></div>
-          <input class="ai-inp" id="ai-input" placeholder="메시지 입력..." type="text">
-          <button class="ai-sndb" id="ai-send"><i class="ti ti-send"></i></button>
-        </div>
+      <div class="ai-sw">
+        <div class="ai-sh"><div class="ai-shc">😼</div><div><div class="ai-sht">골목대장 AI 검색</div><div class="ai-shs">상권·창업 무엇이든 물어보세요</div></div></div>
+        <div class="aichips"><div class="aichip">유동인구 많은 곳 찾아줘</div><div class="aichip">임대료 싼 상권은?</div><div class="aichip">카페 창업 적합 지역</div><div class="aichip">폐업률 낮은 업종</div><div class="aichip">이번달 지원금 알려줘</div></div>
+        <div class="ai-msgs" id="ai-msgs"><div class="mbot">안녕하세요 사장님! 동탄 상권이나 창업에 대해 궁금한 것 편하게 물어보세요.</div><div class="musr">유동인구 많은 곳 찾아줘</div><div class="mbot">업종이 어떻게 되세요? 음식점, 카페, 소매 중 선택해 주시면 맞춤 분석 드릴게요!</div></div>
+        <div class="ai-ia"><div class="ai-mb"><i class="ti ti-microphone"></i></div><input class="ai-inp" id="ai-inp" placeholder="메시지 입력..." type="text"><button class="ai-sb" id="ai-snd"><i class="ti ti-send"></i></button></div>
       </div>
     </div>
 
-    <!-- ══ PROFILE SCREEN ══ -->
+    <!-- 프로필 -->
     <div class="screen" id="screen-profile">
-      <div class="profile-header">
-        <div class="prof-av">김</div>
-        <div class="prof-name">김사장님</div>
-        <div class="prof-type">음식·요리주점 · 경기 화성 동탄</div>
-      </div>
-      <div class="prof-stats">
-        <div class="ps-item"><div class="ps-val">128</div><div class="ps-lbl">팔로워</div></div>
-        <div class="ps-item"><div class="ps-val">47</div><div class="ps-lbl">팔로잉</div></div>
-        <div class="ps-item"><div class="ps-val">23</div><div class="ps-lbl">게시글</div></div>
-        <div class="ps-item"><div class="ps-val">412</div><div class="ps-lbl">받은공감</div></div>
-      </div>
-      <div style="padding:10px;">
-        <div class="prof-menu">
-          <div class="pm-item"><i class="ti ti-edit"></i> 내 게시글 <i class="ti ti-chevron-right arr"></i></div>
-          <div class="pm-item"><i class="ti ti-bookmark"></i> 저장한 글 <i class="ti ti-chevron-right arr"></i></div>
-          <div class="pm-item"><i class="ti ti-bell"></i> 알림 설정 <span class="pm-badge">3</span></div>
-          <div class="pm-item"><i class="ti ti-map-pin"></i> 동네 설정 <i class="ti ti-chevron-right arr"></i></div>
-          <div class="pm-item"><i class="ti ti-user"></i> 프로필 수정 <i class="ti ti-chevron-right arr"></i></div>
-          <div class="pm-item"><i class="ti ti-settings"></i> 앱 설정 <i class="ti ti-chevron-right arr"></i></div>
-          <div class="pm-item" style="color:var(--dn);"><i class="ti ti-logout" style="color:var(--dn);"></i> 로그아웃 <i class="ti ti-chevron-right arr"></i></div>
-        </div>
-      </div>
+      <div class="prof-hd"><div class="prof-av">김</div><div class="prof-nm">김사장님</div><div class="prof-tp">음식·요리주점 · 경기 화성 동탄</div></div>
+      <div class="prof-stats"><div class="ps-i"><div class="ps-v">128</div><div class="ps-l">팔로워</div></div><div class="ps-i"><div class="ps-v">47</div><div class="ps-l">팔로잉</div></div><div class="ps-i"><div class="ps-v">23</div><div class="ps-l">게시글</div></div><div class="ps-i"><div class="ps-v">412</div><div class="ps-l">받은공감</div></div></div>
+      <div style="padding:10px;"><div class="pmenu">
+        <div class="pm-i"><i class="ti ti-edit"></i>내 게시글<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i"><i class="ti ti-bookmark"></i>저장한 글<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i"><i class="ti ti-bell"></i>알림 설정<span class="pm-bdg">3</span></div>
+        <div class="pm-i"><i class="ti ti-map-pin"></i>동네 설정<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i"><i class="ti ti-user"></i>프로필 수정<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i"><i class="ti ti-settings"></i>앱 설정<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i" style="color:var(--dn);"><i class="ti ti-logout" style="color:var(--dn);"></i>로그아웃<i class="ti ti-chevron-right pm-arr"></i></div>
+      </div></div>
     </div>
+  </div>
 
-  </div><!-- /screens -->
-
-  <!-- BOTTOM NAV -->
+  <!-- 하단 탭 -->
   <div class="bottom-nav">
-    <div class="bn-item act" data-screen="home">
-      <i class="ti ti-home"></i>
-      <span>홈</span>
-    </div>
-    <div class="bn-item" data-screen="search">
-      <i class="ti ti-search"></i>
-      <span>검색</span>
-    </div>
-    <div class="bn-item" data-screen="home" id="write-fab-btn" style="position:relative;">
-      <div style="width:46px;height:46px;background:var(--ch);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-18px;border:3px solid var(--white);">
-        <i class="ti ti-plus" style="font-size:24px;color:#fff;"></i>
-      </div>
-      <span style="margin-top:2px;">글쓰기</span>
-    </div>
-    <div class="bn-item" data-screen="ai">
-      <i class="ti ti-robot"></i>
-      <span>AI검색</span>
-    </div>
-    <div class="bn-item" data-screen="profile">
-      <i class="ti ti-user"></i>
-      <span>내정보</span>
-    </div>
+    <div class="bn-item act" data-s="home"><i class="ti ti-home"></i><span>홈</span></div>
+    <div class="bn-item" data-s="search"><i class="ti ti-search"></i><span>검색</span></div>
+    <div class="bn-plus-wrap" id="write-btn"><div class="bn-plus"><i class="ti ti-plus"></i></div><span>글쓰기</span></div>
+    <div class="bn-item" data-s="ai"><i class="ti ti-robot"></i><span>AI검색</span></div>
+    <div class="bn-item" data-s="profile"><i class="ti ti-user"></i><span>내정보</span></div>
   </div>
 </div>
 
-<!-- 글쓰기 시트 -->
-<div class="overlay" id="write-overlay">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">게시글 작성</div>
-    <textarea id="post-content" placeholder="사장님들과 이야기를 나눠보세요...&#10;&#10;위치, 업종 태그를 추가하면 더 많은 사장님들이 볼 수 있어요!"></textarea>
-    <div class="sheet-acts">
-      <button class="sab"><i class="ti ti-photo"></i> 사진</button>
-      <button class="sab"><i class="ti ti-map-pin"></i> 위치</button>
-      <button class="sab"><i class="ti ti-tag"></i> 업종태그</button>
-      <button class="sab"><i class="ti ti-speakerphone"></i> 이벤트</button>
-    </div>
-    <button class="sheet-submit" id="submit-post">게시하기</button>
-  </div>
+<div class="overlay" id="wr-overlay">
+  <div class="sheet"><div class="sh-hd"></div><div class="sh-t">게시글 작성</div><textarea id="post-txt" placeholder="사장님들과 이야기를 나눠보세요..."></textarea><div class="sh-acts"><button class="sab"><i class="ti ti-photo"></i>사진</button><button class="sab"><i class="ti ti-map-pin"></i>위치</button><button class="sab"><i class="ti ti-tag"></i>업종태그</button><button class="sab"><i class="ti ti-speakerphone"></i>이벤트</button></div><button class="sh-sub" id="post-sub">게시하기</button></div>
 </div>
-
-<!-- 토스트 -->
 <div class="toast" id="toast"></div>
 
 <script>
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2000);
-}
-
-// 하단 탭 네비게이션
-const bnItems=document.querySelectorAll('.bn-item');
-bnItems.forEach(item=>{
-  item.addEventListener('click',()=>{
-    const sc=item.dataset.screen;
-    if(item.id==='write-fab-btn'){
-      document.getElementById('write-overlay').classList.add('open');
-      return;
-    }
-    bnItems.forEach(b=>b.classList.remove('act'));
-    item.classList.add('act');
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById('screen-'+sc).classList.add('active');
-  });
-});
-
-// 검색 버튼
-document.getElementById('btn-search-open').addEventListener('click',()=>{
-  bnItems.forEach(b=>b.classList.remove('act'));
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-search').classList.add('active');
-  setTimeout(()=>document.getElementById('search-inp').focus(),100);
-});
-
-// 피드 탭 전환
-const tabAll=document.getElementById('tab-all');
-const tabDong=document.getElementById('tab-dong');
-const rbar=document.getElementById('rbar');
-const evSec=document.getElementById('ev-sec');
-tabAll.addEventListener('click',()=>{
-  tabAll.classList.add('act');tabDong.classList.remove('act');
-  rbar.style.display='none';evSec.style.display='none';
-  showToast('전체 게시글');
-});
-tabDong.addEventListener('click',()=>{
-  tabDong.classList.add('act');tabAll.classList.remove('act');
-  rbar.style.display='flex';evSec.style.display='block';
-  showToast('우리동네 게시글');
-});
-
-// 동네 범위
-document.querySelectorAll('.rpill').forEach(p=>{
-  p.addEventListener('click',()=>{
-    document.querySelectorAll('.rpill').forEach(r=>r.classList.remove('act'));
-    p.classList.add('act');
-    showToast(p.dataset.range+' 기준');
-  });
-});
-
-// 카테고리 필터
-document.querySelectorAll('.ct').forEach(ct=>{
-  ct.addEventListener('click',()=>{
-    document.querySelectorAll('.ct').forEach(c=>c.classList.remove('act'));
-    ct.classList.add('act');
-    const cat=ct.dataset.cat;
-    document.querySelectorAll('.pc').forEach(pc=>{
-      pc.style.display=(cat==='all'||pc.dataset.cat===cat)?'block':'none';
-    });
-  });
-});
-
-// 공감
-document.querySelectorAll('.like-btn').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    const cnt=btn.querySelector('.cnt');
-    if(btn.dataset.liked){
-      cnt.textContent=parseInt(cnt.textContent)-1;
-      btn.style.color='';delete btn.dataset.liked;
-    } else {
-      cnt.textContent=parseInt(cnt.textContent)+1;
-      btn.style.color='#E24B4A';btn.dataset.liked='1';
-      showToast('공감했습니다');
-    }
-  });
-});
-
-// 저장
-document.querySelectorAll('.save-btn').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    if(btn.dataset.saved){
-      btn.style.color='';delete btn.dataset.saved;showToast('저장 취소');
-    } else {
-      btn.style.color='#F5A623';btn.dataset.saved='1';showToast('저장했습니다');
-    }
-  });
-});
-
-// 글쓰기 시트
-const overlay=document.getElementById('write-overlay');
-document.getElementById('open-write').addEventListener('click',()=>overlay.classList.add('open'));
-document.getElementById('open-write-btn').addEventListener('click',()=>overlay.classList.add('open'));
-overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('open');});
-document.getElementById('submit-post').addEventListener('click',()=>{
-  const v=document.getElementById('post-content').value.trim();
-  if(!v){showToast('내용을 입력해주세요');return;}
-  overlay.classList.remove('open');
-  document.getElementById('post-content').value='';
-  showToast('게시글이 등록되었습니다!');
-});
-
-// AI 채팅
-const aiInput=document.getElementById('ai-input');
-const aiSend=document.getElementById('ai-send');
-const aiMsgs=document.getElementById('ai-messages');
-const reps=['더 자세히 알려주세요!','소진공 데이터 기준으로 분석할게요.','해당 업종 상권 분석을 시작합니다.','관련 정보를 찾고 있어요...','좋은 질문이에요! 데이터를 불러올게요.'];
-function addMsg(text,isUser){
-  const d=document.createElement('div');
-  d.className=isUser?'musr':'mbot';d.textContent=text;
-  aiMsgs.appendChild(d);aiMsgs.scrollTop=aiMsgs.scrollHeight;
-}
-function sendAI(){
-  const v=aiInput.value.trim();if(!v)return;
-  addMsg(v,true);aiInput.value='';
-  setTimeout(()=>addMsg(reps[Math.floor(Math.random()*reps.length)],false),700);
-}
-aiSend.addEventListener('click',sendAI);
-aiInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendAI();});
-
-// AI 빠른 칩
-document.querySelectorAll('.aichip').forEach(chip=>{
-  chip.addEventListener('click',()=>{
-    aiInput.value=chip.textContent;
-    sendAI();
-  });
-});
-
-// 검색 태그
-document.querySelectorAll('.sr-tag').forEach(tag=>{
-  tag.addEventListener('click',()=>{
-    document.getElementById('search-inp').value=tag.textContent;
-    showToast('"'+tag.textContent+'" 검색');
-  });
-});
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+function sw(sc){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+sc).classList.add('active');}
+document.querySelectorAll('.bn-item[data-s]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));b.classList.add('act');sw(b.dataset.s);});});
+document.getElementById('write-btn').addEventListener('click',()=>document.getElementById('wr-overlay').classList.add('open'));
+document.getElementById('open-search').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));sw('search');setTimeout(()=>document.getElementById('srch-inp').focus(),100);});
+document.getElementById('go-ai').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));document.querySelector('.bn-item[data-s="ai"]').classList.add('act');sw('ai');});
+document.getElementById('tab-all').addEventListener('click',()=>{document.getElementById('tab-all').classList.add('act');document.getElementById('tab-dong').classList.remove('act');document.getElementById('rbar').style.display='none';document.getElementById('ev-sec').style.display='none';showToast('전체 게시글');});
+document.getElementById('tab-dong').addEventListener('click',()=>{document.getElementById('tab-dong').classList.add('act');document.getElementById('tab-all').classList.remove('act');document.getElementById('rbar').style.display='flex';document.getElementById('ev-sec').style.display='block';showToast('우리동네 게시글');});
+document.querySelectorAll('.rpill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.rpill').forEach(r=>r.classList.remove('act'));p.classList.add('act');showToast(p.dataset.r+' 기준');}));
+document.querySelectorAll('.ct').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.ct').forEach(x=>x.classList.remove('act'));c.classList.add('act');const cat=c.dataset.cat;document.querySelectorAll('.pc').forEach(p=>{p.style.display=(cat==='all'||p.dataset.cat===cat)?'block':'none';});}));
+document.querySelectorAll('.like-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const c=b.querySelector('.cnt');if(b.dataset.l){c.textContent=parseInt(c.textContent)-1;b.style.color='';delete b.dataset.l;}else{c.textContent=parseInt(c.textContent)+1;b.style.color='#E24B4A';b.dataset.l='1';showToast('공감했습니다');}}));
+document.querySelectorAll('.save-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();if(b.dataset.s){b.style.color='';delete b.dataset.s;showToast('저장 취소');}else{b.style.color='#F5A623';b.dataset.s='1';showToast('저장했습니다');}}));
+const ov=document.getElementById('wr-overlay');
+document.getElementById('open-write').addEventListener('click',()=>ov.classList.add('open'));
+document.getElementById('open-write-btn').addEventListener('click',()=>ov.classList.add('open'));
+ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});
+document.getElementById('post-sub').addEventListener('click',()=>{const v=document.getElementById('post-txt').value.trim();if(!v){showToast('내용을 입력해주세요');return;}ov.classList.remove('open');document.getElementById('post-txt').value='';showToast('게시글이 등록되었습니다!');});
+const aiI=document.getElementById('ai-inp'),aiS=document.getElementById('ai-snd'),aiM=document.getElementById('ai-msgs');
+const reps=['소진공 데이터 기준으로 분석할게요.','해당 업종 상권 분석을 시작합니다.','관련 정보를 찾고 있어요...','더 자세한 조건을 알려주시면 더 정확히 분석해 드릴게요.'];
+function addMsg(t,u){const d=document.createElement('div');d.className=u?'musr':'mbot';d.textContent=t;aiM.appendChild(d);aiM.scrollTop=aiM.scrollHeight;}
+function sendAI(){const v=aiI.value.trim();if(!v)return;addMsg(v,true);aiI.value='';setTimeout(()=>addMsg(reps[Math.floor(Math.random()*reps.length)],false),700);}
+aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key==='Enter')sendAI();});
+document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
+document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
 </body>
 </html>
