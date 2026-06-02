@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -15,7 +15,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .topbar{background:var(--ch);flex-shrink:0;}
 .tb-main{height:56px;display:flex;align-items:center;padding:0 16px;gap:10px;}
 .tb-logo{display:flex;align-items:center;gap:8px;flex:1;}
-.tb-cat{width:34px;height:34px;border-radius:50%;background:var(--white);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.tb-cat{width:34px;height:34px;border-radius:50%;background:var(--white);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.tb-cat img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
 .tb-name{font-size:18px;font-weight:700;color:#fff;}
 .tb-sub{font-size:10px;color:rgba(255,255,255,.85);margin-top:1px;}
 .tb-icons{display:flex;gap:4px;}
@@ -70,7 +71,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .schg{font-size:10px;margin-top:3px;display:flex;align-items:center;gap:2px;}
 .up{color:var(--up);}.dn{color:var(--dn);}
 .aicard{background:var(--chl);border:1px solid var(--chb);border-radius:12px;padding:14px;display:flex;gap:10px;cursor:pointer;}
-.aicat{width:38px;height:38px;border-radius:50%;background:var(--ch);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.aicat{width:38px;height:38px;border-radius:50%;background:var(--ch);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.aicat img{width:100%;height:100%;object-fit:contain;}
 .ailbl{font-size:11px;color:var(--chdd);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
 .ailbl i{font-size:13px;}
 .aitxt{font-size:13px;color:var(--chdd);line-height:1.6;}
@@ -133,7 +135,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .hotc{font-size:10px;color:var(--t3);margin-top:2px;}
 .ai-sw{display:flex;flex-direction:column;height:100%;}
 .ai-sh{background:var(--ch);padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.ai-shc{width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ai-shc{width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.ai-shc img{width:100%;height:100%;object-fit:contain;}
 .ai-sht{font-size:15px;font-weight:700;color:#fff;}
 .ai-shs{font-size:11px;color:rgba(255,255,255,.85);}
 .aichips{padding:8px 14px;display:flex;gap:6px;overflow-x:auto;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0;}
@@ -194,7 +197,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
   <div class="topbar">
     <div class="tb-main">
       <div class="tb-logo">
-        <div class="tb-cat">😼</div>
+        <div class="tb-cat"><img src="assets/gmlogo.png" alt="골목대장 로고" width="34" height="34"></div>
         <div><div class="tb-name">골목대장</div><div class="tb-sub">소상공인 상권분석 커뮤니티</div></div>
       </div>
       <div class="tb-icons">
@@ -241,34 +244,34 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
           </div>
         </div>
         <!-- AI 분석 -->
-        <div class="aicard" id="go-ai"><div class="aicat">😼</div><div><div class="ailbl"><i class="ti ti-robot"></i>골목대장 AI 분석</div><div class="aitxt">이 상권 요리주점 업종은 전년 대비 매출이 감소하고 있어요. 피크타임은 금요일 18~23시예요. 지금이 오히려 진입 타이밍일 수 있어요!</div></div></div>
+        <div class="aicard" id="go-ai"><div class="aicat"><img src="assets/gmlogo.png" alt="골목대장 로고" width="38" height="38"></div><div><div class="ailbl"><i class="ti ti-robot"></i>골목대장 AI 분석</div><div class="aitxt">이 상권 요리주점 업종은 전년 대비 매출이 감소하고 있어요. 피크타임은 금요일 18~23시예요. 지금이 오히려 진입 타이밍일 수 있어요!</div></div></div>
         <!-- 이벤트 -->
         <div class="evsec" id="ev-sec">
-          <div class="evhd"><span class="evt"><i class="ti ti-speakerphone"></i>이번 주 우리동네 이벤트·애로사항</span><span class="evm">전체보기</span></div>
+          <div class="evhd"><span class="evt"><i class="ti ti-speakerphone"></i>이번 주 우리동네 이벤트·이슈</span><span class="evm">전체보기</span></div>
           <div class="evscroll">
             <div class="evc"><span class="evbdg" style="background:var(--ch);">D-3</span><div class="evtype"><i class="ti ti-discount"></i>할인이벤트</div><div class="evname">오픈 1주년 기념<br>전 메뉴 20% 할인</div><div class="evshop">동탄 맛있는 김밥집</div><div class="evdate">~06.04(화)</div></div>
-            <div class="evc"><span class="evbdg" style="background:#1D9E75;">모집</span><div class="evtype"><i class="ti ti-shopping-cart"></i>공동구매</div><div class="evname">식자재 공동구매<br>사장님 모집</div><div class="evshop">동탄 사장님 모임</div><div class="evdate">~06.08(토)</div></div>
-            <div class="evc"><span class="evbdg" style="background:#E24B4A;">긴급</span><div class="evtype"><i class="ti ti-alert-circle"></i>애로사항</div><div class="evname">도로공사 인한<br>접근성 차단 문제</div><div class="evshop">동탄 센트럴 상가</div><div class="evdate">진행 중</div></div>
+            <div class="evc"><span class="evbdg" style="background:#1D9E75;">모집</span><div class="evtype"><i class="ti ti-shopping-cart"></i>공동구매</div><div class="evname">식자재 공동구매<br>대장님 모집</div><div class="evshop">동탄 대장님 모임</div><div class="evdate">~06.08(토)</div></div>
+            <div class="evc"><span class="evbdg" style="background:#E24B4A;">긴급</span><div class="evtype"><i class="ti ti-alert-circle"></i>이슈</div><div class="evname">도로공사 인한<br>접근성 차단 문제</div><div class="evshop">동탄 센트럴 상가</div><div class="evdate">진행 중</div></div>
             <div class="evc"><span class="evbdg" style="background:#378ADD;">행사</span><div class="evtype"><i class="ti ti-users"></i>모임·행사</div><div class="evname">동탄 소상공인<br>네트워킹 모임</div><div class="evshop">동탄2 커뮤니티센터</div><div class="evdate">06.10(월) 7시</div></div>
           </div>
         </div>
         <!-- 글쓰기 -->
-        <div class="wbox"><div class="wrow"><div class="wav">김</div><div class="winp" id="open-write">사장님들과 이야기 나눠보세요...</div></div>
+        <div class="wbox"><div class="wrow"><div class="wav">김</div><div class="winp" id="open-write">대장님들과 이야기 나눠보세요...</div></div>
           <div class="wacts"><button class="wab"><i class="ti ti-photo"></i>사진</button><button class="wab"><i class="ti ti-map-pin"></i>위치</button><button class="wab"><i class="ti ti-tag"></i>업종태그</button><button class="wab"><i class="ti ti-speakerphone"></i>이벤트</button><button class="pbtn" id="open-write-btn">게시</button></div>
         </div>
         <!-- 게시글 -->
         <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);">
-          <div class="ctabs"><div class="ct act" data-cat="all">전체</div><div class="ct" data-cat="qna">질문·고민</div><div class="ct" data-cat="info">정보공유</div><div class="ct" data-cat="startup">창업준비</div><div class="ct" data-cat="issue">애로사항</div><div class="ct" data-cat="event">이벤트</div></div>
+          <div class="ctabs"><div class="ct act" data-cat="all">전체</div><div class="ct" data-cat="qna">질문·고민</div><div class="ct" data-cat="info">정보공유</div><div class="ct" data-cat="startup">창업준비</div><div class="ct" data-cat="issue">이슈</div><div class="ct" data-cat="event">이벤트</div></div>
           <div class="plist">
-            <div class="pc" data-cat="qna"><div class="pctop"><div class="pcav" style="background:#FAEEDA;color:#633806;">김</div><div><span class="pcnm">김사장님</span><span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·주점</span><div class="pcinfo">화성 동탄 · 팔로워 128명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">임대료 인상 통보 거부할 수 있나요?</div><div class="pcbody">건물주가 갑자기 임대료를 20% 올린다고 통보했는데 계약서에는 아무 내용이 없었거든요. 법적으로 거부 가능한지 조언 부탁드려요.</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">32</span></span><span class="pca"><i class="ti ti-message-circle"></i>14</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">12분 전</span></div></div>
-            <div class="pc" data-cat="info"><div class="pctop"><div class="pcav" style="background:#E1F5EE;color:#085041;">박</div><div><span class="pcnm">박사장님</span><span class="pcbdg" style="background:#E1F5EE;color:#085041;">카페·디저트</span><div class="pcinfo">화성 동탄 · 팔로워 89명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄1동</span></div><div class="pctit">신규 아파트 입주 후 상권 변화 체감하시나요?</div><div class="pcbody">최근 동탄 신규 입주 완공 후 점심 손님이 확 늘었어요. 상권 데이터 어디서 보시는지 아시는 분 계세요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">58</span></span><span class="pca"><i class="ti ti-message-circle"></i>27</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">1시간 전</span></div></div>
-            <div class="pc" data-cat="qna"><div class="pctop"><div class="pcav" style="background:#E6F1FB;color:#0C447C;">이</div><div><span class="pcnm">이사장님</span><span class="pcbdg" style="background:#E6F1FB;color:#0C447C;">소매·편의점</span><div class="pcinfo">수원 팔달 · 팔로워 214명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>인계동</span></div><div class="pctit">폐업 고민 중인데 솔직한 조언 부탁드려요</div><div class="pcbody">3년째 운영 중인데 매달 적자예요. 버텨야 할지 정리할지 너무 힘드네요. 비슷한 경험 있으신 분들 어떻게 결정하셨나요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">103</span></span><span class="pca"><i class="ti ti-message-circle"></i>41</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">3시간 전</span></div></div>
-            <div class="pc" data-cat="issue"><div class="pctop"><div class="pcav" style="background:#FAEEDA;color:#633806;">최</div><div><span class="pcnm">최사장님</span><span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·치킨</span><div class="pcinfo">화성 동탄 · 팔로워 67명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">도로공사로 손님이 반토막 났어요</div><div class="pcbody">앞 도로 공사가 두 달째인데 매출이 반으로 줄었어요. 구청 민원도 묵묵부답이고 어떻게 대응하셨나요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">76</span></span><span class="pca"><i class="ti ti-message-circle"></i>33</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">5시간 전</span></div></div>
+            <div class="pc" data-cat="qna"><div class="pctop"><div class="pcav" style="background:#FAEEDA;color:#633806;">김</div><div><span class="pcnm">김대장님</span><span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·주점</span><div class="pcinfo">화성 동탄 · 팔로워 128명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">임대료 인상 통보 거부할 수 있나요?</div><div class="pcbody">건물주가 갑자기 임대료를 20% 올린다고 통보했는데 계약서에는 아무 내용이 없었거든요. 법적으로 거부 가능한지 조언 부탁드려요.</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">32</span></span><span class="pca"><i class="ti ti-message-circle"></i>14</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">12분 전</span></div></div>
+            <div class="pc" data-cat="info"><div class="pctop"><div class="pcav" style="background:#E1F5EE;color:#085041;">박</div><div><span class="pcnm">박대장님</span><span class="pcbdg" style="background:#E1F5EE;color:#085041;">카페·디저트</span><div class="pcinfo">화성 동탄 · 팔로워 89명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄1동</span></div><div class="pctit">신규 아파트 입주 후 상권 변화 체감하시나요?</div><div class="pcbody">최근 동탄 신규 입주 완공 후 점심 손님이 확 늘었어요. 상권 데이터 어디서 보시는지 아시는 분 계세요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">58</span></span><span class="pca"><i class="ti ti-message-circle"></i>27</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">1시간 전</span></div></div>
+            <div class="pc" data-cat="qna"><div class="pctop"><div class="pcav" style="background:#E6F1FB;color:#0C447C;">이</div><div><span class="pcnm">이대장님</span><span class="pcbdg" style="background:#E6F1FB;color:#0C447C;">소매·편의점</span><div class="pcinfo">수원 팔달 · 팔로워 214명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>인계동</span></div><div class="pctit">폐업 고민 중인데 솔직한 조언 부탁드려요</div><div class="pcbody">3년째 운영 중인데 매달 적자예요. 버텨야 할지 정리할지 너무 힘드네요. 비슷한 경험 있으신 분들 어떻게 결정하셨나요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">103</span></span><span class="pca"><i class="ti ti-message-circle"></i>41</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">3시간 전</span></div></div>
+            <div class="pc" data-cat="issue"><div class="pctop"><div class="pcav" style="background:#FAEEDA;color:#633806;">최</div><div><span class="pcnm">최대장님</span><span class="pcbdg" style="background:#FAEEDA;color:#633806;">음식·치킨</span><div class="pcinfo">화성 동탄 · 팔로워 67명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">도로공사로 손님이 반토막 났어요</div><div class="pcbody">앞 도로 공사가 두 달째인데 매출이 반으로 줄었어요. 구청 민원도 묵묵부답이고 어떻게 대응하셨나요?</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">76</span></span><span class="pca"><i class="ti ti-message-circle"></i>33</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">5시간 전</span></div></div>
             <div class="pc" data-cat="startup"><div class="pctop"><div class="pcav" style="background:#EEEDFE;color:#3C3489;">정</div><div><span class="pcnm">정예비사장</span><span class="pcbdg" style="background:#EEEDFE;color:#3C3489;">창업준비</span><div class="pcinfo">화성 동탄 · 팔로워 12명</div></div><span class="pcpin"><i class="ti ti-map-pin"></i>동탄2동</span></div><div class="pctit">동탄2동 카페 창업 자리 추천해주실 분?</div><div class="pcbody">1억 초반대 소형 카페 창업 준비 중이에요. 유동인구 많고 임대료 적당한 자리 추천 부탁드려요!</div><div class="pcbot"><span class="pca like-btn"><i class="ti ti-heart"></i><span class="cnt">45</span></span><span class="pca"><i class="ti ti-message-circle"></i>22</span><span class="pca save-btn"><i class="ti ti-bookmark"></i></span><span class="pca"><i class="ti ti-share"></i></span><span class="pct">어제</span></div></div>
           </div>
         </div>
         <div class="wcard"><div class="wct"><i class="ti ti-trending-up"></i>인기 검색 상권<span class="wct-m">더보기</span></div><div class="tri"><span class="trr">1</span><span class="trt">동탄 센트럴파크</span><span class="trtg">급상승</span></div><div class="tri"><span class="trr">2</span><span class="trt">수원 행궁동</span><span class="trtg">인기</span></div><div class="tri"><span class="trr">3</span><span class="trt">화성 봉담읍</span><span class="trtg">신규</span></div><div class="tri"><span class="trr">4</span><span class="trt">수원 인계동</span></div><div class="tri"><span class="trr">5</span><span class="trt">오산 세마동</span></div></div>
-        <div class="wcard" style="margin-bottom:12px;"><div class="wct"><i class="ti ti-flame"></i>지금 뜨는 글<span class="wct-m">전체보기</span></div><div class="hoti"><span class="hotn">01</span><div><div class="hott">식자재 공동구매 함께 할 사장님 모집해요</div><div class="hotc">공감 88 · 댓글 34</div></div></div><div class="hoti"><span class="hotn">02</span><div><div class="hott">소상공인 전기료 지원 신청 기간 연장</div><div class="hotc">공감 71 · 댓글 19</div></div></div><div class="hoti"><span class="hotn">03</span><div><div class="hott">배달앱 수수료 협상 성공 후기</div><div class="hotc">공감 64 · 댓글 52</div></div></div></div>
+        <div class="wcard" style="margin-bottom:12px;"><div class="wct"><i class="ti ti-flame"></i>지금 뜨는 글<span class="wct-m">전체보기</span></div><div class="hoti"><span class="hotn">01</span><div><div class="hott">식자재 공동구매 함께 할 대장님 모집해요</div><div class="hotc">공감 88 · 댓글 34</div></div></div><div class="hoti"><span class="hotn">02</span><div><div class="hott">소상공인 전기료 지원 신청 기간 연장</div><div class="hotc">공감 71 · 댓글 19</div></div></div><div class="hoti"><span class="hotn">03</span><div><div class="hott">배달앱 수수료 협상 성공 후기</div><div class="hotc">공감 64 · 댓글 52</div></div></div></div>
       </div>
     </div>
 
@@ -284,16 +287,16 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
     <!-- AI -->
     <div class="screen" id="screen-ai">
       <div class="ai-sw">
-        <div class="ai-sh"><div class="ai-shc">😼</div><div><div class="ai-sht">골목대장 AI 검색</div><div class="ai-shs">상권·창업 무엇이든 물어보세요</div></div></div>
+        <div class="ai-sh"><div class="ai-shc"><img src="assets/gmlogo.png" alt="골목대장 로고" width="40" height="40"></div><div><div class="ai-sht">골목대장 AI 검색</div><div class="ai-shs">상권·창업 무엇이든 물어보세요</div></div></div>
         <div class="aichips"><div class="aichip">유동인구 많은 곳 찾아줘</div><div class="aichip">임대료 싼 상권은?</div><div class="aichip">카페 창업 적합 지역</div><div class="aichip">폐업률 낮은 업종</div><div class="aichip">이번달 지원금 알려줘</div></div>
-        <div class="ai-msgs" id="ai-msgs"><div class="mbot">안녕하세요 사장님! 동탄 상권이나 창업에 대해 궁금한 것 편하게 물어보세요.</div><div class="musr">유동인구 많은 곳 찾아줘</div><div class="mbot">업종이 어떻게 되세요? 음식점, 카페, 소매 중 선택해 주시면 맞춤 분석 드릴게요!</div></div>
+        <div class="ai-msgs" id="ai-msgs"><div class="mbot">안녕하세요 대장님! 동탄 상권이나 창업에 대해 궁금한 것 편하게 물어보세요.</div><div class="musr">유동인구 많은 곳 찾아줘</div><div class="mbot">업종이 어떻게 되세요? 음식점, 카페, 소매 중 선택해 주시면 맞춤 분석 드릴게요!</div></div>
         <div class="ai-ia"><div class="ai-mb"><i class="ti ti-microphone"></i></div><input class="ai-inp" id="ai-inp" placeholder="메시지 입력..." type="text"><button class="ai-sb" id="ai-snd"><i class="ti ti-send"></i></button></div>
       </div>
     </div>
 
     <!-- 프로필 -->
     <div class="screen" id="screen-profile">
-      <div class="prof-hd"><div class="prof-av">김</div><div class="prof-nm">김사장님</div><div class="prof-tp">음식·요리주점 · 경기 화성 동탄</div></div>
+      <div class="prof-hd"><div class="prof-av">김</div><div class="prof-nm">김대장님</div><div class="prof-tp">음식·요리주점 · 경기 화성 동탄</div></div>
       <div class="prof-stats"><div class="ps-i"><div class="ps-v">128</div><div class="ps-l">팔로워</div></div><div class="ps-i"><div class="ps-v">47</div><div class="ps-l">팔로잉</div></div><div class="ps-i"><div class="ps-v">23</div><div class="ps-l">게시글</div></div><div class="ps-i"><div class="ps-v">412</div><div class="ps-l">받은공감</div></div></div>
       <div style="padding:10px;"><div class="pmenu">
         <div class="pm-i"><i class="ti ti-edit"></i>내 게시글<i class="ti ti-chevron-right pm-arr"></i></div>
@@ -318,7 +321,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 </div>
 
 <div class="overlay" id="wr-overlay">
-  <div class="sheet"><div class="sh-hd"></div><div class="sh-t">게시글 작성</div><textarea id="post-txt" placeholder="사장님들과 이야기를 나눠보세요..."></textarea><div class="sh-acts"><button class="sab"><i class="ti ti-photo"></i>사진</button><button class="sab"><i class="ti ti-map-pin"></i>위치</button><button class="sab"><i class="ti ti-tag"></i>업종태그</button><button class="sab"><i class="ti ti-speakerphone"></i>이벤트</button></div><button class="sh-sub" id="post-sub">게시하기</button></div>
+  <div class="sheet"><div class="sh-hd"></div><div class="sh-t">게시글 작성</div><textarea id="post-txt" placeholder="대장님들과 이야기를 나눠보세요..."></textarea><div class="sh-acts"><button class="sab"><i class="ti ti-photo"></i>사진</button><button class="sab"><i class="ti ti-map-pin"></i>위치</button><button class="sab"><i class="ti ti-tag"></i>업종태그</button><button class="sab"><i class="ti ti-speakerphone"></i>이벤트</button></div><button class="sh-sub" id="post-sub">게시하기</button></div>
 </div>
 <div class="toast" id="toast"></div>
 
