@@ -18,7 +18,9 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .tb-cat{width:34px;height:34px;border-radius:50%;background:var(--white);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .tb-cat img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
 .tb-name{font-size:18px;font-weight:700;color:#fff;}
-.tb-sub{font-size:10px;color:rgba(255,255,255,.85);margin-top:1px;}
+.tb-slogan{margin-top:1px;line-height:1.35;}
+.tb-slogan-l1{font-size:10px;font-weight:500;color:rgba(255,255,255,.95);}
+.tb-slogan-l2{font-size:9px;font-style:italic;color:rgba(255,255,255,.8);margin-top:2px;}
 .tb-icons{display:flex;gap:4px;}
 .tbi{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:20px;position:relative;}
 .tbi.dot::after{content:'';position:absolute;top:7px;right:7px;width:8px;height:8px;background:#fff;border-radius:50%;border:2px solid var(--ch);}
@@ -44,12 +46,29 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .feed-tabs{background:var(--white);border-bottom:1px solid var(--border);display:flex;position:sticky;top:0;z-index:40;}
 .ft{flex:1;padding:12px 0;font-size:14px;cursor:pointer;color:var(--t2);border-bottom:3px solid transparent;display:flex;align-items:center;justify-content:center;gap:5px;}
 .ft.act{color:var(--chd);font-weight:500;border-bottom-color:var(--ch);}
-.rbar{background:var(--chl);border-bottom:1px solid var(--chb);padding:8px 14px;display:flex;align-items:center;gap:7px;overflow-x:auto;white-space:nowrap;}
-.rbar::-webkit-scrollbar{display:none;}
-.rlbl{font-size:11px;color:var(--chdd);font-weight:700;flex-shrink:0;}
-.rpill{padding:4px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--chb);color:var(--chdd);background:transparent;flex-shrink:0;}
-.rpill.act{background:var(--ch);border-color:var(--ch);color:#fff;font-weight:500;}
-.lchip{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:11px;color:var(--chdd);cursor:pointer;flex-shrink:0;}
+.range-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:10px 14px 12px;}
+.loc-chip-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.loc-chip{display:flex;align-items:center;gap:5px;background:var(--chl);border:1px solid var(--chb);border-radius:20px;padding:5px 12px;cursor:pointer;}
+.loc-chip i{font-size:13px;color:var(--ch);}
+.loc-chip-text{font-size:12px;font-weight:700;color:var(--chdd);}
+.loc-chip-chev{font-size:12px;color:var(--chd);}
+.loc-edit-btn{font-size:11px;color:var(--chd);font-weight:500;display:flex;align-items:center;gap:3px;cursor:pointer;}
+.loc-edit-btn i{font-size:13px;}
+.seg-control{display:grid;grid-template-columns:repeat(3,1fr);background:#F0EDE6;border-radius:12px;padding:3px;position:relative;}
+.seg-slider{position:absolute;top:3px;height:calc(100% - 6px);width:calc(33.333% - 2px);background:var(--white);border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.12);transition:transform .22s cubic-bezier(.4,0,.2,1);pointer-events:none;left:3px;}
+.seg-slider.pos-0{transform:translateX(0);}
+.seg-slider.pos-1{transform:translateX(calc(100% + 2px));}
+.seg-slider.pos-2{transform:translateX(calc(200% + 4px));}
+.seg-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:10px;cursor:pointer;position:relative;z-index:1;transition:color .2s;border:none;background:transparent;font-family:inherit;}
+.seg-btn i{font-size:16px;color:var(--t3);transition:color .2s;}
+.seg-btn-label{font-size:11px;color:var(--t3);font-weight:500;transition:color .2s;}
+.seg-btn-sub{font-size:9px;color:var(--t3);transition:color .2s;opacity:.7;}
+.seg-btn.active i{color:var(--ch);}
+.seg-btn.active .seg-btn-label{color:var(--chd);font-weight:700;}
+.seg-btn.active .seg-btn-sub{color:var(--chd);opacity:1;}
+.range-desc{display:flex;align-items:center;gap:5px;margin-top:8px;padding:6px 10px;background:var(--chl);border-radius:8px;border-left:3px solid var(--ch);}
+.range-desc i{font-size:13px;color:var(--chd);flex-shrink:0;}
+.range-desc span{font-size:11px;color:var(--chdd);line-height:1.4;}
 .fbody{padding:12px;display:flex;flex-direction:column;gap:10px;}
 .qsec{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:14px;}
 .qs-t{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:12px;}
@@ -261,7 +280,13 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
     <div class="tb-main">
       <div class="tb-logo">
         <div class="tb-cat"><img src="assets/gmlogo.png" alt="골목대장 로고" width="34" height="34"></div>
-        <div><div class="tb-name">골목대장</div><div class="tb-sub">소상공인 상권분석 커뮤니티</div></div>
+        <div>
+          <div class="tb-name">골목대장</div>
+          <div class="tb-slogan">
+            <div class="tb-slogan-l1">우리는 모두 골목대장</div>
+            <div class="tb-slogan-l2">데이터로 보는 상권의 힘</div>
+          </div>
+        </div>
       </div>
       <div class="tb-icons">
         <div class="tbi dot"><i class="ti ti-bell"></i></div>
@@ -280,12 +305,37 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
         <div class="ft" id="tab-all"><i class="ti ti-world"></i> 전체글</div>
         <div class="ft act" id="tab-dong"><i class="ti ti-map-pin"></i> 우리동네</div>
       </div>
-      <div class="rbar" id="rbar">
-        <span class="rlbl">동네 범위</span>
-        <div class="rpill act" data-r="우리동네">우리동네</div>
-        <div class="rpill" data-r="인근동네">인근 동네</div>
-        <div class="rpill" data-r="전체지역">전체 지역</div>
-        <div class="lchip"><i class="ti ti-map-pin"></i>동탄2동<i class="ti ti-chevron-down"></i></div>
+      <div class="range-wrap" id="rbar">
+        <div class="loc-chip-row">
+          <div class="loc-chip">
+            <i class="ti ti-map-pin"></i>
+            <span class="loc-chip-text">경기 화성시 동탄2동</span>
+            <i class="ti ti-chevron-down loc-chip-chev"></i>
+          </div>
+          <div class="loc-edit-btn"><i class="ti ti-pencil"></i> 동네 변경</div>
+        </div>
+        <div class="seg-control" id="seg-control">
+          <div class="seg-slider pos-0" id="seg-slider"></div>
+          <button type="button" class="seg-btn active" data-idx="0" data-r="우리동네" data-desc="내가 설정한 동네의 게시글만 표시됩니다.">
+            <i class="ti ti-home"></i>
+            <span class="seg-btn-label">우리동네</span>
+            <span class="seg-btn-sub">동탄2동</span>
+          </button>
+          <button type="button" class="seg-btn" data-idx="1" data-r="인근동네" data-desc="우리동네 + 주변 인근 동네 게시글이 함께 표시됩니다.">
+            <i class="ti ti-map-2"></i>
+            <span class="seg-btn-label">인근 동네</span>
+            <span class="seg-btn-sub">동탄 일대</span>
+          </button>
+          <button type="button" class="seg-btn" data-idx="2" data-r="전체지역" data-desc="전국 모든 소상공인 대장님들의 게시글이 표시됩니다.">
+            <i class="ti ti-world"></i>
+            <span class="seg-btn-label">전체 지역</span>
+            <span class="seg-btn-sub">전국</span>
+          </button>
+        </div>
+        <div class="range-desc" id="range-desc">
+          <i class="ti ti-info-circle"></i>
+          <span id="range-desc-text">내가 설정한 동네의 게시글만 표시됩니다.</span>
+        </div>
       </div>
       <div class="fbody">
         <!-- 빠른 메뉴 -->
@@ -503,8 +553,9 @@ document.getElementById('write-btn').addEventListener('click',()=>document.getEl
 document.getElementById('open-search').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));sw('search');setTimeout(()=>document.getElementById('srch-inp').focus(),100);});
 document.getElementById('go-ai').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));document.querySelector('.bn-item[data-s="ai"]').classList.add('act');sw('ai');});
 document.getElementById('tab-all').addEventListener('click',()=>{document.getElementById('tab-all').classList.add('act');document.getElementById('tab-dong').classList.remove('act');document.getElementById('rbar').style.display='none';document.getElementById('ev-sec').style.display='none';showToast('전체 게시글');});
-document.getElementById('tab-dong').addEventListener('click',()=>{document.getElementById('tab-dong').classList.add('act');document.getElementById('tab-all').classList.remove('act');document.getElementById('rbar').style.display='flex';document.getElementById('ev-sec').style.display='block';showToast('우리동네 게시글');});
-document.querySelectorAll('.rpill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.rpill').forEach(r=>r.classList.remove('act'));p.classList.add('act');showToast(p.dataset.r+' 기준');}));
+document.getElementById('tab-dong').addEventListener('click',()=>{document.getElementById('tab-dong').classList.add('act');document.getElementById('tab-all').classList.remove('act');document.getElementById('rbar').style.display='block';document.getElementById('ev-sec').style.display='block';showToast('우리동네 게시글');});
+const segBtns=document.querySelectorAll('.seg-btn'),segSlider=document.getElementById('seg-slider'),rangeDescText=document.getElementById('range-desc-text');
+segBtns.forEach(btn=>{btn.addEventListener('click',()=>{segBtns.forEach(b=>b.classList.remove('active'));btn.classList.add('active');segSlider.className='seg-slider pos-'+btn.dataset.idx;rangeDescText.textContent=btn.dataset.desc;showToast(btn.dataset.r+' 기준');});});
 document.querySelectorAll('.ct').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.ct').forEach(x=>x.classList.remove('act'));c.classList.add('act');const cat=c.dataset.cat;document.querySelectorAll('.pc').forEach(p=>{p.style.display=(cat==='all'||p.dataset.cat===cat)?'block':'none';});}));
 document.querySelectorAll('.like-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const c=b.querySelector('.cnt');if(b.dataset.l){c.textContent=parseInt(c.textContent)-1;b.style.color='';delete b.dataset.l;}else{c.textContent=parseInt(c.textContent)+1;b.style.color='#E24B4A';b.dataset.l='1';showToast('공감했습니다');}}));
 document.querySelectorAll('.save-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();if(b.dataset.s){b.style.color='';delete b.dataset.s;showToast('저장 취소');}else{b.style.color='#F5A623';b.dataset.s='1';showToast('저장했습니다');}}));
