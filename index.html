@@ -273,8 +273,9 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .sh-sub{width:100%;background:var(--ch);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:500;cursor:pointer;margin-top:12px;}
 .toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(26,26,26,.92);color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;opacity:0;pointer-events:none;transition:all .25s;z-index:300;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:16px;}
-.modal-bg.open{display:flex;}
+.modal-bg{display:none!important;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:16px;pointer-events:none;}
+.modal-bg.open{display:flex!important;pointer-events:auto;z-index:210;}
+.modal-bg.open > .modal,.modal-bg.open > .auth-modal-sheet{pointer-events:auto;max-height:90vh;overflow-y:auto;}
 .modal-box{background:var(--white);border-radius:16px;width:100%;max-width:360px;padding:20px;border:1px solid var(--border);}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .modal-t{font-size:16px;font-weight:700;}
@@ -299,6 +300,19 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .auth-btn-naver{background:#03C75A;border:none;color:#fff;}
 .auth-error{background:#FFF1F1;color:var(--dn);padding:8px;border-radius:8px;font-size:12px;}
 .auth-agree-box{background:var(--bg);padding:10px;border-radius:10px;font-size:11px;display:flex;flex-direction:column;gap:4px;margin-bottom:8px;}
+.auth-intro{font-size:13px;color:var(--t2);margin-bottom:10px;line-height:1.5;}
+.auth-divider{display:flex;align-items:center;gap:8px;margin:10px 0;color:var(--t3);font-size:12px;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.auth-social-col{display:flex;flex-direction:column;gap:8px;}
+.auth-link-btn{background:none;border:none;color:var(--t3);font-size:12px;text-decoration:underline;cursor:pointer;width:100%;text-align:center;margin-top:6px;}
+.auth-success{background:#E8F8F0;color:var(--up);padding:8px;border-radius:8px;font-size:12px;}
+.auth-forgot-desc{font-size:12px;color:var(--t2);text-align:center;margin-bottom:8px;}
+.auth-btn-outline{width:100%;border:1px solid var(--ch);background:none;border-radius:12px;padding:11px;color:var(--chd);cursor:pointer;margin-top:8px;}
+.auth-label{font-size:11px;color:var(--t2);margin-top:4px;}
+.modal{background:var(--white);border-radius:16px;width:100%;max-width:360px;padding:20px;border:1px solid var(--border);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.modal-title{font-size:16px;font-weight:700;}
+.modal-close{background:none;border:none;font-size:22px;color:var(--t3);cursor:pointer;}
 </style>
 </head>
 <body>
@@ -558,27 +572,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
   </div>
 </div>
 
-<div class="modal-bg" id="login-modal">
-  <div class="modal-box">
-    <div class="modal-hd">
-      <span class="modal-t">대장님 로그인</span>
-      <button type="button" class="modal-x" id="close-login-modal"><i class="ti ti-x"></i></button>
-    </div>
-    <div id="login-panel">
-      <p style="font-size:13px;color:var(--t2);margin-bottom:12px;">커뮤니티 이용을 위해 로그인해주세요.</p>
-      <div class="login-btns">
-        <button type="button" class="lbtn" id="btn-google-login"><i class="ti ti-brand-google"></i> Google로 시작하기</button>
-        <button type="button" class="lbtn lbtn-kakao" id="btn-kakao-login">카카오 (준비중)</button>
-        <button type="button" class="lbtn lbtn-naver" id="btn-naver-login">네이버 (준비중)</button>
-      </div>
-      <p class="auth-note">Supabase에서 Google Provider 활성화 필요</p>
-    </div>
-    <div id="logged-panel" style="display:none;text-align:center;">
-      <p id="logged-email" style="font-size:13px;margin-bottom:12px;"></p>
-      <button type="button" class="lbtn" id="btn-logout">로그아웃</button>
-    </div>
-  </div>
-</div>
+<!-- 로그인 모달: js/auth_modals.js 가 #login-overlay 주입 -->
 
 <div class="overlay" id="wr-overlay">
   <div class="sheet">
@@ -623,7 +617,7 @@ aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key
 document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
 document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
-<script type="module" src="js/auth.js"></script>
-<script type="module" src="js/community_ui.js"></script>
+<script type="module" src="js/auth.js?v=20260604"></script>
+<script type="module" src="js/community_ui.js?v=20260604"></script>
 </body>
 </html>
