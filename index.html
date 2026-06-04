@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script src="js/device_redirect.js"></script>
+<link rel="icon" href="/assets/gmlogo.png" type="image/png">
+<link rel="preload" href="/assets/gmlogo.png" as="image" type="image/png">
 <title>골목대장</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
@@ -16,8 +18,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .topbar{background:var(--ch);flex-shrink:0;}
 .tb-main{height:56px;display:flex;align-items:center;padding:0 16px;gap:10px;}
 .tb-logo{display:flex;align-items:center;gap:8px;flex:1;}
-.tb-cat{width:34px;height:34px;border-radius:50%;background:var(--white);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.tb-cat img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.tb-cat{width:34px;height:34px;border-radius:50%;background:var(--chl);border:2px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.tb-cat img{width:100%;height:100%;object-fit:contain;display:block;padding:2px;}
 .tb-name{font-size:18px;font-weight:700;color:#fff;}
 .tb-sub{font-size:10px;color:rgba(255,255,255,.9);margin-top:1px;white-space:nowrap;}
 .tb-icons{display:flex;gap:4px;}
@@ -116,8 +118,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 
 .ai-card-new{border-radius:14px;overflow:hidden;border:1px solid var(--chb);box-shadow:0 2px 10px rgba(245,166,35,.12);}
 .ai-card-header{background:linear-gradient(135deg,#F5A623 0%,#E8920E 100%);padding:12px 14px;display:flex;align-items:center;gap:10px;}
-.ai-logo{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
-.ai-logo img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.ai-logo{width:40px;height:40px;border-radius:50%;background:var(--chl);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.ai-logo img{width:100%;height:100%;object-fit:contain;display:block;padding:3px;}
 .ai-hd-text{flex:1;}
 .ai-hd-title{font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px;}
 .ai-hd-title i{font-size:15px;}
@@ -216,8 +218,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .hotc{font-size:10px;color:var(--t3);margin-top:2px;}
 .ai-sw{display:flex;flex-direction:column;height:100%;}
 .ai-sh{background:var(--ch);padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.ai-shc{width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
-.ai-shc img{width:100%;height:100%;object-fit:contain;}
+.ai-shc{width:40px;height:40px;border-radius:50%;background:var(--chl);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.ai-shc img{width:100%;height:100%;object-fit:contain;display:block;padding:3px;}
 .ai-sht{font-size:15px;font-weight:700;color:#fff;}
 .ai-shs{font-size:11px;color:rgba(255,255,255,.85);}
 .aichips{padding:8px 14px;display:flex;gap:6px;overflow-x:auto;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0;}
@@ -289,7 +291,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
   <div class="topbar">
     <div class="tb-main">
       <div class="tb-logo">
-        <div class="tb-cat"><img src="assets/gmlogo.png" alt="골목대장 로고" width="34" height="34"></div>
+        <div class="tb-cat"><img src="/assets/gmlogo.png" alt="골목대장 로고" width="34" height="34" decoding="async"></div>
         <div>
           <div class="tb-name">골목대장</div>
           <div class="tb-sub">우리는 모두 골목대장, 데이터로 보는 상권의 힘</div>
@@ -396,7 +398,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
         <!-- AI 분석 카드 -->
         <div class="ai-card-new" id="go-ai">
           <div class="ai-card-header">
-            <div class="ai-logo"><img src="assets/gmlogo.png" alt="골목대장 로고"></div>
+            <div class="ai-logo"><img src="/assets/gmlogo.png" alt="골목대장 로고" width="40" height="40" decoding="async"></div>
             <div class="ai-hd-text">
               <div class="ai-hd-title"><i class="ti ti-robot"></i> 골목대장 AI 분석</div>
               <div class="ai-hd-sub">동탄 · 요리주점 · 26년 03월 기준</div>
@@ -514,7 +516,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
     <!-- AI -->
     <div class="screen" id="screen-ai">
       <div class="ai-sw">
-        <div class="ai-sh"><div class="ai-shc"><img src="assets/gmlogo.png" alt="골목대장 로고" width="40" height="40"></div><div><div class="ai-sht">골목대장 AI 검색</div><div class="ai-shs">상권·창업 무엇이든 물어보세요</div></div></div>
+        <div class="ai-sh"><div class="ai-shc"><img src="/assets/gmlogo.png" alt="골목대장 로고" width="40" height="40" decoding="async"></div><div><div class="ai-sht">골목대장 AI 검색</div><div class="ai-shs">상권·창업 무엇이든 물어보세요</div></div></div>
         <div class="aichips"><div class="aichip">유동인구 많은 곳 찾아줘</div><div class="aichip">임대료 싼 상권은?</div><div class="aichip">카페 창업 적합 지역</div><div class="aichip">폐업률 낮은 업종</div><div class="aichip">이번달 지원금 알려줘</div></div>
         <div class="ai-msgs" id="ai-msgs"><div class="mbot">안녕하세요 대장님! 동탄 상권이나 창업에 대해 궁금한 것 편하게 물어보세요.</div><div class="musr">유동인구 많은 곳 찾아줘</div><div class="mbot">업종이 어떻게 되세요? 음식점, 카페, 소매 중 선택해 주시면 맞춤 분석 드릴게요!</div></div>
         <div class="ai-ia"><div class="ai-mb"><i class="ti ti-microphone"></i></div><input class="ai-inp" id="ai-inp" placeholder="메시지 입력..." type="text"><button class="ai-sb" id="ai-snd"><i class="ti ti-send"></i></button></div>
