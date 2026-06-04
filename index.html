@@ -309,6 +309,21 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .auth-forgot-desc{font-size:12px;color:var(--t2);text-align:center;margin-bottom:8px;}
 .auth-btn-outline{width:100%;border:1px solid var(--ch);background:none;border-radius:12px;padding:11px;color:var(--chd);cursor:pointer;margin-top:8px;}
 .auth-label{font-size:11px;color:var(--t2);margin-top:4px;}
+.signup-label{font-size:12px;color:#555;font-weight:500;display:block;margin-bottom:4px;}
+.signup-label .req{color:#E24B4A;}
+.signup-hint{font-size:11px;color:#999;font-weight:400;}
+.signup-section-divider{height:1px;background:#F0EDE6;margin:4px 0;}
+.signup-optional-title{font-size:12px;color:#999;font-weight:500;}
+.pw-wrap{position:relative;}
+.pw-wrap .auth-input{padding-right:40px;}
+.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#999;font-size:16px;padding:4px;}
+.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.status-btn{text-align:center;padding:10px 6px;border-radius:10px;border:1px solid #E8E4DC;background:#fff;font-size:12px;font-weight:500;color:#555;cursor:pointer;line-height:1.4;}
+.status-btn.act{border:1px solid #F5A623;background:#FFF8E7;color:#C17F24;}
+.status-label{cursor:pointer;display:block;}
+.signup-agree .agree-row{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;margin-bottom:6px;flex-wrap:wrap;}
+.signup-agree .agree-all-row{font-size:13px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #E8E4DC;}
+.signup-agree .agree-row a{margin-left:auto;color:#F5A623;font-size:11px;text-decoration:none;}
 .modal{background:var(--white);border-radius:16px;width:100%;max-width:360px;padding:20px;border:1px solid var(--border);}
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .modal-title{font-size:16px;font-weight:700;}
@@ -617,7 +632,7 @@ aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key
 document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
 document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
-<script type="module" src="js/auth.js?v=20260604"></script>
-<script type="module" src="js/community_ui.js?v=20260604"></script>
+<script type="module" src="js/auth.js?v=20260605"></script>
+<script type="module" src="js/community_ui.js?v=20260605"></script>
 </body>
 </html>
