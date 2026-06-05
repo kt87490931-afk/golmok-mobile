@@ -395,7 +395,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
         <div class="qsec">
           <div class="qs-t">빠른 메뉴</div>
           <div class="qgrid">
-            <div class="qi" onclick="showToast('상권분석')"><div class="qicon"><i class="ti ti-map" style="color:var(--ch);"></i></div><span class="qlbl">상권분석</span></div>
+            <div class="qi nav-analysis"><div class="qicon"><i class="ti ti-map" style="color:var(--ch);"></i></div><span class="qlbl">상권분석</span></div>
             <div class="qi" onclick="showToast('창업기상도')"><div class="qicon"><i class="ti ti-cloud" style="color:var(--info);"></i></div><span class="qlbl">창업기상도</span></div>
             <div class="qi" onclick="showToast('핫플레이스')"><div class="qicon"><i class="ti ti-flame" style="color:var(--dn);"></i></div><span class="qlbl">핫플레이스</span></div>
             <div class="qi" onclick="showToast('정책지원')"><div class="qicon"><i class="ti ti-file-text" style="color:var(--up);"></i></div><span class="qlbl">정책지원</span></div>
@@ -566,8 +566,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
       <div class="prof-hd"><div class="prof-av" id="prof-av">?</div><div class="prof-nm" id="prof-nm">로그인</div><div class="prof-tp" id="prof-tp">로그인 후 이용 가능</div></div>
       <div class="prof-stats"><div class="ps-i"><div class="ps-v">128</div><div class="ps-l">팔로워</div></div><div class="ps-i"><div class="ps-v">47</div><div class="ps-l">팔로잉</div></div><div class="ps-i"><div class="ps-v">23</div><div class="ps-l">게시글</div></div><div class="ps-i"><div class="ps-v">412</div><div class="ps-l">받은공감</div></div></div>
       <div style="padding:10px;"><div class="pmenu">
-        <div class="pm-i"><i class="ti ti-edit"></i>내 게시글<i class="ti ti-chevron-right pm-arr"></i></div>
-        <div class="pm-i"><i class="ti ti-bookmark"></i>저장한 글<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i" id="pm-my-posts"><i class="ti ti-edit"></i>내 게시글<i class="ti ti-chevron-right pm-arr"></i></div>
+        <div class="pm-i" id="pm-saved-posts"><i class="ti ti-bookmark"></i>저장한 글<i class="ti ti-chevron-right pm-arr"></i></div>
         <div class="pm-i"><i class="ti ti-bell"></i>알림 설정<span class="pm-bdg">3</span></div>
         <div class="pm-i"><i class="ti ti-map-pin"></i>동네 설정<i class="ti ti-chevron-right pm-arr"></i></div>
         <div class="pm-i"><i class="ti ti-user"></i>프로필 수정<i class="ti ti-chevron-right pm-arr"></i></div>
@@ -602,12 +602,45 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
     </div>
     <input id="post-title" type="text" placeholder="제목 (선택)" style="width:100%;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:8px;">
     <textarea id="post-content" placeholder="대장님들과 이야기를 나눠보세요..."></textarea>
+    <input type="file" id="image-file-input" accept="image/*" multiple style="display:none;">
+    <div id="image-preview-wrap" style="display:none;gap:8px;flex-wrap:wrap;margin-top:8px;"></div>
     <div id="event-date-wrap" style="display:none;margin-top:8px;">
       <label style="font-size:11px;color:var(--t3);">이벤트 종료일</label>
       <input id="event-end-date" type="date" style="width:100%;border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:13px;margin-top:4px;">
     </div>
-    <div class="sh-acts"><button type="button" class="sab"><i class="ti ti-photo"></i>사진</button><button type="button" class="sab"><i class="ti ti-map-pin"></i>위치</button></div>
+    <div class="sh-acts"><button type="button" class="sab" id="btn-photo-upload"><i class="ti ti-photo"></i>사진 <span id="image-count" style="color:var(--ch);"></span></button><button type="button" class="sab"><i class="ti ti-map-pin"></i>위치</button></div>
     <button type="button" class="sh-sub" id="submit-post">게시하기</button>
+  </div>
+</div>
+<div class="overlay" id="my-activity-overlay">
+  <div class="sheet" style="max-height:85vh;display:flex;flex-direction:column;">
+    <div class="sh-hd"></div>
+    <div class="sh-t">내 활동</div>
+    <div style="display:flex;border-bottom:1px solid var(--border);">
+      <button type="button" class="activity-tab act" data-tab="my-posts" style="flex:1;padding:12px 0;border:none;background:none;font-size:13px;border-bottom:2px solid var(--ch);color:var(--chd);">내 게시글</button>
+      <button type="button" class="activity-tab" data-tab="saved-posts" style="flex:1;padding:12px 0;border:none;background:none;font-size:13px;color:var(--t3);">저장한 글</button>
+    </div>
+    <div id="activity-list" style="flex:1;overflow-y:auto;padding:8px 12px 16px;"></div>
+    <button type="button" id="close-activity-overlay" style="margin:0 12px 12px;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;">닫기</button>
+  </div>
+</div>
+<div class="overlay" id="analysis-overlay">
+  <div class="sheet" style="max-height:90vh;overflow-y:auto;padding-bottom:16px;">
+    <div class="sh-hd"></div>
+    <div class="sh-t">상권분석</div>
+    <div id="analysis-wizard" style="padding:0 4px;"><div id="analysis-wizard-body"></div></div>
+    <div id="analysis-result" style="display:none;padding:0 4px;">
+      <div style="background:var(--chl);border-radius:10px;padding:10px;margin-bottom:10px;border:1px solid var(--chb);"><div style="font-size:11px;color:var(--chdd);">분석 조건</div><div id="analysis-condition" style="font-weight:700;color:var(--chd);"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+        <div style="background:#EBF4FF;border-radius:10px;padding:10px;"><div style="font-size:10px;color:#378ADD;">유동인구</div><div id="stat-population" style="font-size:18px;font-weight:700;"></div><div id="stat-population-change" style="font-size:10px;"></div></div>
+        <div style="background:var(--chl);border-radius:10px;padding:10px;"><div style="font-size:10px;color:var(--chd);">월 매출</div><div id="stat-revenue" style="font-size:18px;font-weight:700;"></div><div id="stat-revenue-change" style="font-size:10px;"></div></div>
+        <div style="grid-column:1/-1;background:#FFF1F1;border-radius:10px;padding:10px;"><div style="font-size:10px;color:var(--dn);">동종 업소</div><div style="display:flex;justify-content:space-between;"><div id="stat-stores" style="font-size:18px;font-weight:700;"></div><div id="stat-stores-change" style="font-size:10px;"></div></div></div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:10px;"><div style="font-size:12px;font-weight:700;margin-bottom:8px;">시간대별 유동인구</div><div id="hourly-chart" style="display:flex;gap:4px;align-items:flex-end;height:70px;"></div><div id="peak-info" style="font-size:11px;margin-top:8px;padding:6px 8px;background:var(--chl);border-radius:6px;"></div></div>
+      <div style="background:linear-gradient(135deg,var(--ch),#E8920E);border-radius:10px;padding:12px;color:#fff;"><div style="font-size:11px;opacity:.9;margin-bottom:4px;">AI 분석 (Mock)</div><div id="ai-comment" style="font-size:12px;line-height:1.6;"></div></div>
+      <button type="button" id="btn-reset-analysis" style="width:100%;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;">다시 검색</button>
+    </div>
+    <button type="button" id="close-analysis-overlay" style="margin:12px 4px 0;padding:10px;width:calc(100% - 8px);border:1px solid var(--border);border-radius:10px;background:#fff;">닫기</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -627,7 +660,10 @@ aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key
 document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
 document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
-<script type="module" src="js/auth.js?v=20260607"></script>
-<script type="module" src="js/community_ui.js?v=20260607"></script>
+<script type="module" src="js/auth.js?v=20260608"></script>
+<script type="module" src="js/community_ui.js?v=20260608"></script>
+<script type="module" src="js/profile_ui.js?v=20260608"></script>
+<script type="module" src="js/analysis.js?v=20260608"></script>
+<script type="module" src="js/fcm.js?v=20260608"></script>
 </body>
 </html>
