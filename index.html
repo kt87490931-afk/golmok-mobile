@@ -402,10 +402,10 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
         <div class="qsec">
           <div class="qs-t">빠른 메뉴</div>
           <div class="qgrid">
-            <div class="qi nav-analysis"><div class="qicon"><i class="ti ti-map" style="color:var(--ch);"></i></div><span class="qlbl">상권분석</span></div>
-            <div class="qi" onclick="showToast('창업기상도')"><div class="qicon"><i class="ti ti-cloud" style="color:var(--info);"></i></div><span class="qlbl">창업기상도</span></div>
-            <div class="qi" onclick="showToast('핫플레이스')"><div class="qicon"><i class="ti ti-flame" style="color:var(--dn);"></i></div><span class="qlbl">핫플레이스</span></div>
-            <div class="qi" onclick="showToast('정책지원')"><div class="qicon"><i class="ti ti-file-text" style="color:var(--up);"></i></div><span class="qlbl">정책지원</span></div>
+            <div class="qi nav-analysis" onclick="location.href='coming-soon.html?page=analysis'"><div class="qicon"><i class="ti ti-map" style="color:var(--ch);"></i></div><span class="qlbl">상권분석</span></div>
+            <div class="qi" onclick="location.href='coming-soon.html?page=startup'"><div class="qicon"><i class="ti ti-cloud" style="color:var(--info);"></i></div><span class="qlbl">창업기상도</span></div>
+            <div class="qi" onclick="location.href='coming-soon.html?page=hotplace'"><div class="qicon"><i class="ti ti-flame" style="color:var(--dn);"></i></div><span class="qlbl">핫플레이스</span></div>
+            <div class="qi" onclick="location.href='policy.html'"><div class="qicon"><i class="ti ti-file-text" style="color:var(--up);"></i></div><span class="qlbl">정책지원</span></div>
           </div>
         </div>
         <!-- 상권 통계 카드 -->
@@ -478,7 +478,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
               이번 주 우리동네
               <span class="ev-cnt-badge">4</span>
             </div>
-            <div class="ev-more-btn">전체보기 <i class="ti ti-chevron-right"></i></div>
+            <a href="events.html" class="ev-more-btn" style="text-decoration:none;color:inherit;">전체보기 <i class="ti ti-chevron-right"></i></a>
           </div>
           <div class="ev-scroll-wrap">
             <div class="ev-card-m">
@@ -544,8 +544,9 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
           <div class="ctabs"><div class="ct act" data-cat="all">전체</div><div class="ct" data-cat="qna">질문·고민</div><div class="ct" data-cat="info">정보공유</div><div class="ct" data-cat="startup">창업준비</div><div class="ct" data-cat="issue">이슈</div><div class="ct" data-cat="event">이벤트</div></div>
           <div class="plist" id="post-list"></div>
         </div>
-        <div class="wcard"><div class="wct"><i class="ti ti-trending-up"></i>인기 검색 상권<span class="wct-m">더보기</span></div><div class="tri"><span class="trr">1</span><span class="trt">동탄 센트럴파크</span><span class="trtg">급상승</span></div><div class="tri"><span class="trr">2</span><span class="trt">수원 행궁동</span><span class="trtg">인기</span></div><div class="tri"><span class="trr">3</span><span class="trt">화성 봉담읍</span><span class="trtg">신규</span></div><div class="tri"><span class="trr">4</span><span class="trt">수원 인계동</span></div><div class="tri"><span class="trr">5</span><span class="trt">오산 세마동</span></div></div>
-        <div class="wcard" style="margin-bottom:12px;"><div class="wct"><i class="ti ti-flame"></i>지금 뜨는 글<span class="wct-m">전체보기</span></div><div class="hoti"><span class="hotn">01</span><div><div class="hott">식자재 공동구매 함께 할 대장님 모집해요</div><div class="hotc">공감 88 · 댓글 34</div></div></div><div class="hoti"><span class="hotn">02</span><div><div class="hott">소상공인 전기료 지원 신청 기간 연장</div><div class="hotc">공감 71 · 댓글 19</div></div></div><div class="hoti"><span class="hotn">03</span><div><div class="hott">배달앱 수수료 협상 성공 후기</div><div class="hotc">공감 64 · 댓글 52</div></div></div></div>
+        <div class="wcard"><div class="wct"><i class="ti ti-trending-up"></i>인기 검색 상권<span class="wct-m">더보기</span></div><div id="popular-areas-list"><div style="padding:10px 0;color:#999;font-size:12px;">불러오는 중...</div></div></div>
+        <div class="wcard" style="margin-bottom:12px;"><div class="wct"><i class="ti ti-flame"></i>지금 뜨는 글<span class="wct-m">전체보기</span></div><div id="hot-posts-list"><div style="padding:10px 0;color:#999;font-size:12px;">불러오는 중...</div></div></div>
+        <div class="wcard" style="margin-bottom:12px;"><div class="wct"><i class="ti ti-user-plus"></i>이웃 대장님</div><div id="neighbor-list"><div style="padding:10px 0;color:#999;font-size:12px;text-align:center;">불러오는 중...</div></div></div>
       </div>
     </div>
 
@@ -690,9 +691,9 @@ aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key
 document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
 document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
-<script type="module" src="js/profile_ui.js?v=20260613"></script>
+<script type="module" src="js/profile_ui.js?v=20260620"></script>
 <script type="module" src="js/auth.js?v=20260613"></script>
-<script type="module" src="js/community_ui.js?v=20260619"></script>
+<script type="module" src="js/community_ui.js?v=20260620"></script>
 <script type="module" src="js/analysis.js?v=20260613"></script>
 <script type="module" src="js/notifications_ui.js?v=20260613"></script>
 <script type="module" src="js/fcm.js?v=20260613"></script>

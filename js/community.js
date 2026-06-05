@@ -329,10 +329,14 @@ export async function toggleFollow(targetUserId) {
 
   if (existing) {
     await supabase.from('follows').delete().eq('follower_id', user.id).eq('following_id', targetUserId);
+    await supabase.rpc('decrement_follower_count', { target_user_id: targetUserId }).catch(() => {});
+    await supabase.rpc('decrement_following_count', { current_user_id: user.id }).catch(() => {});
     return { following: false };
   }
 
   await supabase.from('follows').insert({ follower_id: user.id, following_id: targetUserId });
+  await supabase.rpc('increment_follower_count', { target_user_id: targetUserId }).catch(() => {});
+  await supabase.rpc('increment_following_count', { current_user_id: user.id }).catch(() => {});
   return { following: true };
 }
 
@@ -363,16 +367,90 @@ export async function getFollowingIds(userIds) {
   return new Set((data || []).map((r) => r.following_id));
 }
 
-export async function getNeighborUsers(excludeUserId, limit = 5) {
+export async function getNeighborUsers(excludeUserId, { limit = 5, regionSigungu = null } = {}) {
   let query = supabase
     .from('users')
-    .select('id, nickname, profile_image, upjong3nm, region_dong')
+    .select('id, nickname, profile_image, upjong3nm, upjong1nm, region_dong')
+    .eq('is_active', true)
     .order('created_at', { ascending: false })
     .limit(limit);
 
+  if (regionSigungu) query = query.eq('region_sigungu', regionSigungu);
   if (excludeUserId) query = query.neq('id', excludeUserId);
 
   const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getHotPosts(limit = 3) {
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+  const { data, error } = await supabase
+    .from('posts')
+    .select('id, title, content, like_count, comment_count, created_at')
+    .eq('is_deleted', false)
+    .gte('created_at', sevenDaysAgo.toISOString())
+    .order('like_count', { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getPopularAreas(limit = 5) {
+  const { data, error } = await supabase
+    .from('popular_areas')
+    .select('id, name, badge')
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true })
+    .limit(limit);
+
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getPostsByIndustry(upjong1cd, { page = 0, limit = 30 } = {}) {
+  let query = supabase
+    .from('posts')
+    .select(POST_SELECT)
+    .eq('is_deleted', false)
+    .order('created_at', { ascending: false })
+    .range(page * limit, (page + 1) * limit - 1);
+
+  if (upjong1cd) query = query.eq('upjong1cd', upjong1cd);
+
+  const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getEventsByType(eventType, { limit = 50 } = {}) {
+  let query = supabase
+    .from('posts')
+    .select(`*, users(nickname, profile_image, region_dong)`)
+    .eq('is_event', true)
+    .eq('is_deleted', false)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (eventType && eventType !== 'all') query = query.eq('event_type', eventType);
+
+  const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getInfoPosts(limit = 20) {
+  const { data, error } = await supabase
+    .from('posts')
+    .select(POST_SELECT)
+    .eq('category', 'info')
+    .eq('is_deleted', false)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
   if (error) throw error;
   return data || [];
 }
