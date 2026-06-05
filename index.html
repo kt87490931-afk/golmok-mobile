@@ -187,11 +187,18 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .ct{padding:9px 14px;font-size:12px;cursor:pointer;color:var(--t2);border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0;}
 .ct.act{color:var(--chd);font-weight:500;border-bottom-color:var(--ch);background:var(--chl);}
 .plist{display:flex;flex-direction:column;background:var(--white);border-radius:0 0 12px 12px;border:1px solid var(--border);border-top:none;}
-.pc{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
+.pc{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;overflow:hidden;min-width:0;}
 .pc:last-child{border-bottom:none;}
 .pc:active{background:var(--chl);}
 .pctop{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
-.pcav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.pcav{width:36px;height:36px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.pcav-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;flex-shrink:0;}
+.pcimgs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px;max-width:100%;overflow:hidden;}
+.pcimgs--single{display:block;}
+.pcimg-wrap{border-radius:8px;overflow:hidden;max-width:100%;}
+.pcimg-wrap--hero{grid-column:1 / -1;}
+.pcimg{width:100%;max-width:100%;max-height:300px;height:auto;object-fit:cover;border-radius:8px;display:block;}
+.pcimgs--duo .pcimg,.pcimgs--multi .pcimg-wrap:not(.pcimg-wrap--hero) .pcimg{max-height:200px;}
 .pcnm{font-size:12px;font-weight:500;color:var(--t1);}
 .pcinfo{font-size:10px;color:var(--t3);margin-top:1px;}
 .pcbdg{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:500;margin-left:3px;}
@@ -685,7 +692,7 @@ document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{
 </script>
 <script type="module" src="js/profile_ui.js?v=20260613"></script>
 <script type="module" src="js/auth.js?v=20260613"></script>
-<script type="module" src="js/community_ui.js?v=20260613"></script>
+<script type="module" src="js/community_ui.js?v=20260619"></script>
 <script type="module" src="js/analysis.js?v=20260613"></script>
 <script type="module" src="js/notifications_ui.js?v=20260613"></script>
 <script type="module" src="js/fcm.js?v=20260613"></script>

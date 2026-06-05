@@ -110,15 +110,18 @@ function feedLoadErrorHtml(err) {
 
 function renderPostImagesHtml(images) {
   if (!images?.length) return '';
-  const cols = images.length === 1 ? 1 : 2;
-  const items = images
-    .slice(0, 4)
-    .map(
-      (url) =>
-        `<img src="${escapeHtml(url)}" alt="" loading="lazy" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">`
-    )
+  const urls = images.slice(0, 4);
+  const count = urls.length;
+  const countClass = count === 1 ? 'pcimgs--single' : count === 2 ? 'pcimgs--duo' : 'pcimgs--multi';
+
+  const items = urls
+    .map((url, idx) => {
+      const hero = count >= 3 && idx === 0 ? ' pcimg-wrap--hero' : '';
+      return `<div class="pcimg-wrap${hero}"><img src="${escapeHtml(url)}" alt="" class="pcimg" loading="lazy"></div>`;
+    })
     .join('');
-  return `<div class="pcimgs" style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:6px;margin-top:8px;">${items}</div>`;
+
+  return `<div class="pcimgs ${countClass}">${items}</div>`;
 }
 
 function updateImageCountLabel() {
@@ -181,7 +184,7 @@ function bindImageUpload() {
 window.triggerImageUpload = () => document.getElementById('image-file-input')?.click();
 
 function getPostListEl() {
-  return document.getElementById('post-list') || document.querySelector('.plist');
+  return document.getElementById('post-list');
 }
 
 function getWriteOverlay() {
@@ -350,7 +353,7 @@ async function loadEventSection() {
 
 function avatarHtml(user) {
   if (user?.profile_image) {
-    return `<img src="${escapeHtml(user.profile_image)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+    return `<div class="pcav"><img src="${escapeHtml(user.profile_image)}" alt="" class="pcav-img"></div>`;
   }
   const ch = (user?.nickname || '대').charAt(0);
   return `<div class="pcav" style="background:#FAEEDA;color:#633806;">${escapeHtml(ch)}</div>`;
@@ -464,6 +467,30 @@ function createPostCard(post, likedSet, savedSet) {
   div.addEventListener('click', () => openPostDetail(post.id));
 
   return div;
+}
+
+export async function renderPostList(posts, containerId, { reset = true, append = false } = {}) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (reset && !append) {
+    if (!posts?.length) {
+      container.innerHTML = `
+        <div style="padding:40px;text-align:center;color:#999;background:#fff;">
+          <div style="font-size:32px;margin-bottom:10px;">📝</div>
+          <div>아직 게시글이 없습니다.</div>
+          <div style="font-size:12px;margin-top:4px;">첫 번째 대장님이 되어보세요!</div>
+        </div>`;
+      return;
+    }
+    container.innerHTML = '';
+  }
+
+  if (!posts?.length) return;
+
+  const liked = await getLikedPostIds(posts.map((p) => p.id));
+  const saved = await getBookmarkedPostIds(posts.map((p) => p.id));
+  posts.forEach((post) => container.appendChild(createPostCard(post, liked, saved)));
 }
 
 export async function openPostDetail(postId) {
@@ -727,6 +754,7 @@ async function submitNewPost() {
     if (titleEl) titleEl.value = '';
     resetSelectedImages();
     await loadFeed(true);
+    window.dispatchEvent(new CustomEvent('golmok:posts-changed'));
     toast('게시글이 등록되었습니다!');
   } catch (e) {
     console.error(e);
@@ -945,6 +973,16 @@ export async function loadNeighborSection() {
   }
 }
 
+function initCommunityShell() {
+  bindWriteModal();
+  bindImageUpload();
+  bindFollowButtons();
+  loadNeighborSection().catch(() => {});
+  const params = new URLSearchParams(window.location.search);
+  const postId = params.get('post');
+  if (postId) openPostDetail(postId);
+}
+
 export function initCommunity() {
   bindFeedTabs();
   bindCategoryTabs();
@@ -963,14 +1001,17 @@ export function initCommunity() {
   }
 }
 
-window.golmokCommunity = { loadFeed, openPostDetail, initCommunity, openWriteOverlay, openWriteWithPhoto };
+window.golmokCommunity = { loadFeed, openPostDetail, initCommunity, openWriteOverlay, openWriteWithPhoto, renderPostList, loadNeighborSection };
 window.sharePost = sharePost;
 window.openWriteOverlay = openWriteOverlay;
+window.openWriteModal = openWriteOverlay;
+window.renderPostList = renderPostList;
 
 function bootCommunity() {
   if (window.__golmokCommunityBooted) return;
   window.__golmokCommunityBooted = true;
-  initCommunity();
+  if (document.getElementById('post-list')) initCommunity();
+  else initCommunityShell();
 }
 
 if (document.readyState === 'loading') {
