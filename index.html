@@ -530,7 +530,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
         </div>
         <!-- 글쓰기 -->
         <div class="wbox"><div class="wrow"><div class="wav">김</div><div class="winp" id="open-write">대장님들과 이야기 나눠보세요...</div></div>
-          <div class="wacts"><button class="wab"><i class="ti ti-photo"></i>사진</button><button class="wab"><i class="ti ti-map-pin"></i>위치</button><button class="wab"><i class="ti ti-tag"></i>업종태그</button><button class="wab"><i class="ti ti-speakerphone"></i>이벤트</button><button class="pbtn" id="open-write-btn">게시</button></div>
+          <div class="wacts"><button type="button" class="wab" data-write-action="photo" id="feed-photo-btn"><i class="ti ti-photo"></i>사진</button><button type="button" class="wab" data-write-action="location"><i class="ti ti-map-pin"></i>위치</button><button type="button" class="wab" data-write-action="tag"><i class="ti ti-tag"></i>업종태그</button><button type="button" class="wab" data-write-action="event"><i class="ti ti-speakerphone"></i>이벤트</button><button type="button" class="pbtn" id="open-write-btn">게시</button></div>
         </div>
         <!-- 게시글 -->
         <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);">
@@ -612,6 +612,21 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
     <button type="button" class="sh-sub" id="submit-post">게시하기</button>
   </div>
 </div>
+<script>
+(function(){
+  function openWrite(){ document.getElementById('wr-overlay')?.classList.add('open'); }
+  function bind(){
+    document.getElementById('open-write')?.addEventListener('click',openWrite);
+    document.getElementById('open-write-btn')?.addEventListener('click',openWrite);
+    document.getElementById('write-btn')?.addEventListener('click',openWrite);
+    document.getElementById('feed-photo-btn')?.addEventListener('click',function(){
+      openWrite();
+      setTimeout(function(){ document.getElementById('image-file-input')?.click(); },120);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind); else bind();
+})();
+</script>
 <div class="overlay" id="my-activity-overlay">
   <div class="sheet" style="max-height:85vh;display:flex;flex-direction:column;">
     <div class="sh-hd"></div>
@@ -668,11 +683,11 @@ aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key
 document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
 document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
-<script type="module" src="js/profile_ui.js?v=20260612"></script>
-<script type="module" src="js/auth.js?v=20260612"></script>
-<script type="module" src="js/community_ui.js?v=20260612"></script>
-<script type="module" src="js/analysis.js?v=20260612"></script>
-<script type="module" src="js/notifications_ui.js?v=20260612"></script>
-<script type="module" src="js/fcm.js?v=20260612"></script>
+<script type="module" src="js/profile_ui.js?v=20260613"></script>
+<script type="module" src="js/auth.js?v=20260613"></script>
+<script type="module" src="js/community_ui.js?v=20260613"></script>
+<script type="module" src="js/analysis.js?v=20260613"></script>
+<script type="module" src="js/notifications_ui.js?v=20260613"></script>
+<script type="module" src="js/fcm.js?v=20260613"></script>
 </body>
 </html>
