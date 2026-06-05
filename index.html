@@ -616,14 +616,9 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 function sw(sc){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+sc).classList.add('active');}
 document.querySelectorAll('.bn-item[data-s]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));b.classList.add('act');sw(b.dataset.s);});});
-document.getElementById('write-btn').addEventListener('click',()=>document.getElementById('wr-overlay').classList.add('open'));
 document.getElementById('open-search').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));sw('search');setTimeout(()=>document.getElementById('srch-inp').focus(),100);});
 document.getElementById('go-ai').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));document.querySelector('.bn-item[data-s="ai"]').classList.add('act');sw('ai');});
-const ov=document.getElementById('wr-overlay');
-document.getElementById('open-write')?.addEventListener('click',()=>ov?.classList.add('open'));
-document.getElementById('open-write-btn')?.addEventListener('click',()=>ov?.classList.add('open'));
-document.getElementById('write-btn')?.addEventListener('click',()=>ov?.classList.add('open'));
-ov?.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});
+// 글쓰기·피드: community_ui.js
 const aiI=document.getElementById('ai-inp'),aiS=document.getElementById('ai-snd'),aiM=document.getElementById('ai-msgs');
 const reps=['소진공 데이터 기준으로 분석할게요.','해당 업종 상권 분석을 시작합니다.','관련 정보를 찾고 있어요...','더 자세한 조건을 알려주시면 더 정확히 분석해 드릴게요.'];
 function addMsg(t,u){const d=document.createElement('div');d.className=u?'musr':'mbot';d.textContent=t;aiM.appendChild(d);aiM.scrollTop=aiM.scrollHeight;}
@@ -632,7 +627,7 @@ aiS.addEventListener('click',sendAI);aiI.addEventListener('keydown',e=>{if(e.key
 document.querySelectorAll('.aichip').forEach(c=>c.addEventListener('click',()=>{aiI.value=c.textContent;sendAI();}));
 document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{document.getElementById('srch-inp').value=t.textContent;showToast('"'+t.textContent+'" 검색');}));
 </script>
-<script type="module" src="js/auth.js?v=20260605"></script>
-<script type="module" src="js/community_ui.js?v=20260605"></script>
+<script type="module" src="js/auth.js?v=20260607"></script>
+<script type="module" src="js/community_ui.js?v=20260607"></script>
 </body>
 </html>
