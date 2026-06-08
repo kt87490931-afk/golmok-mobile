@@ -577,15 +577,15 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 
     <!-- 프로필 -->
     <div class="screen" id="screen-profile">
-      <div class="prof-hd"><div class="prof-av" id="prof-av">?</div><div class="prof-nm" id="prof-nm">로그인</div><div class="prof-tp" id="prof-tp">로그인 후 이용 가능</div></div>
+      <div class="prof-hd"><div class="prof-av" id="prof-av">?</div><div class="prof-nm" id="prof-nm">로그인</div><a href="profile.html" class="prof-tp" id="prof-tp" style="color:rgba(255,255,255,.85);text-decoration:none;">프로필 설정</a></div>
       <div class="prof-stats"><div class="ps-i"><div class="ps-v">128</div><div class="ps-l">팔로워</div></div><div class="ps-i"><div class="ps-v">47</div><div class="ps-l">팔로잉</div></div><div class="ps-i"><div class="ps-v">23</div><div class="ps-l">게시글</div></div><div class="ps-i"><div class="ps-v">412</div><div class="ps-l">받은공감</div></div></div>
       <div style="padding:10px;"><div class="pmenu">
         <div class="pm-i" id="pm-my-posts"><i class="ti ti-edit"></i>내 게시글<i class="ti ti-chevron-right pm-arr"></i></div>
         <div class="pm-i" id="pm-saved-posts"><i class="ti ti-bookmark"></i>저장한 글<i class="ti ti-chevron-right pm-arr"></i></div>
         <div class="pm-i" id="nav-notifications"><i class="ti ti-bell"></i>알림<span class="pm-bdg" style="display:none;">0</span></div>
-        <div class="pm-i"><i class="ti ti-map-pin"></i>동네 설정<i class="ti ti-chevron-right pm-arr"></i></div>
-        <div class="pm-i"><i class="ti ti-user"></i>프로필 수정<i class="ti ti-chevron-right pm-arr"></i></div>
-        <div class="pm-i"><i class="ti ti-settings"></i>앱 설정<i class="ti ti-chevron-right pm-arr"></i></div>
+        <a class="pm-i" href="profile.html" id="pm-region-settings" style="text-decoration:none;color:inherit;"><i class="ti ti-map-pin"></i>동네 설정<i class="ti ti-chevron-right pm-arr"></i></a>
+        <a class="pm-i" href="profile.html" id="pm-profile-edit" style="text-decoration:none;color:inherit;"><i class="ti ti-user"></i>프로필 수정<i class="ti ti-chevron-right pm-arr"></i></a>
+        <a class="pm-i" href="profile.html" id="pm-app-settings" style="text-decoration:none;color:inherit;"><i class="ti ti-settings"></i>프로필 설정<i class="ti ti-chevron-right pm-arr"></i></a>
         <div class="pm-i" id="pm-logout" style="color:var(--dn);"><i class="ti ti-logout" style="color:var(--dn);"></i>로그아웃<i class="ti ti-chevron-right pm-arr"></i></div>
       </div></div>
     </div>
@@ -685,7 +685,13 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 <script>
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 function sw(sc){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+sc).classList.add('active');}
-document.querySelectorAll('.bn-item[data-s]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));b.classList.add('act');sw(b.dataset.s);});});
+document.querySelectorAll('.bn-item[data-s]').forEach(b=>{
+  if(b.dataset.s==='profile'){
+    b.addEventListener('click',()=>{ window.location.href='profile.html'; });
+    return;
+  }
+  b.addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));b.classList.add('act');sw(b.dataset.s);});
+});
 document.getElementById('open-search').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));sw('search');setTimeout(()=>document.getElementById('srch-inp').focus(),100);});
 document.getElementById('go-ai').addEventListener('click',()=>{document.querySelectorAll('.bn-item').forEach(x=>x.classList.remove('act'));document.querySelector('.bn-item[data-s="ai"]').classList.add('act');sw('ai');});
 // 글쓰기·피드: community_ui.js
