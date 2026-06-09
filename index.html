@@ -203,8 +203,15 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .pcinfo{font-size:10px;color:var(--t3);margin-top:1px;}
 .pcbdg{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:500;margin-left:3px;}
 .pcpin{display:flex;align-items:center;gap:2px;font-size:10px;color:var(--chd);margin-left:auto;flex-shrink:0;}
-.pctit{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;line-height:1.4;}
-.pcbody{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pc-toggle-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;width:100%;margin:0 0 4px;padding:0;border:none;background:none;text-align:left;cursor:pointer;font-family:inherit;}
+.pc-toggle-head .pctit{font-size:13px;font-weight:600;color:var(--t1);margin:0;flex:1;line-height:1.4;}
+.pc-chevron{font-size:15px;color:var(--t3);flex-shrink:0;transition:transform .2s;}
+.pc.pc-expanded .pc-chevron{transform:rotate(180deg);color:var(--chd);}
+.pc-collapsed-hint{font-size:10px;color:var(--t3);margin-bottom:6px;display:flex;align-items:center;gap:3px;}
+.pc.pc-expanded .pc-collapsed-hint{display:none;}
+.pc-detail{display:none;margin-bottom:6px;}
+.pc.pc-expanded .pc-detail{display:block;}
+.pcbody{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:8px;}
 .pcbot{display:flex;align-items:center;gap:12px;}
 .pca{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--t3);cursor:pointer;}
 .pca i{font-size:13px;}
@@ -712,7 +719,7 @@ document.querySelectorAll('.sr-tag').forEach(t=>t.addEventListener('click',()=>{
 </script>
 <script type="module" src="js/profile_ui.js?v=20260620"></script>
 <script type="module" src="js/auth.js?v=20260628"></script>
-<script type="module" src="js/community_ui.js?v=20260629"></script>
+<script type="module" src="js/community_ui.js?v=20260631"></script>
 <script type="module" src="js/analysis.js?v=20260629"></script>
 <script type="module" src="js/notifications_ui.js?v=20260613"></script>
 <script type="module" src="js/fcm.js?v=20260613"></script>
