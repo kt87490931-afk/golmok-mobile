@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>골목대장 — 이동 중</title>
+<script>
+(function () {
+  var path = window.location.pathname || '/';
+  if (path === '/index.html') path = '/';
+  var target = 'https://golmokmaster.com' + path + window.location.search + window.location.hash;
+  window.location.replace(target);
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=https://golmokmaster.com/">
+</head>
+<body style="font-family:sans-serif;text-align:center;padding:48px 16px;background:#F7F3EB;">
+<p><a href="https://golmokmaster.com/">golmokmaster.com</a>으로 이동합니다.</p>
+</body>
+</html>
